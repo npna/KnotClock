@@ -1,0 +1,548 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0DCA4C0829BBAB3400F78368 /* KnotClockApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DCA4C0729BBAB3400F78368 /* KnotClockApp.swift */; };
+		0DCA4C0D29BBAB3400F78368 /* KnotClock.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0DCA4C0B29BBAB3400F78368 /* KnotClock.xcdatamodeld */; };
+		0DCA4C1129BBAB3400F78368 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0DCA4C1029BBAB3400F78368 /* Assets.xcassets */; };
+		0DCA4C1529BBAB3400F78368 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0DCA4C1429BBAB3400F78368 /* Preview Assets.xcassets */; };
+		0DCA4C1C29BBABB400F78368 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DCA4C1B29BBABB400F78368 /* Constants.swift */; };
+		0DCA4C3F29BBABD400F78368 /* Countdown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DCA4C1E29BBABD400F78368 /* Countdown.swift */; };
+		0DCA4C4029BBABD400F78368 /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DCA4C1F29BBABD400F78368 /* Preferences.swift */; };
+		0DCA4C4129BBABD400F78368 /* HideDaily.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DCA4C2029BBABD400F78368 /* HideDaily.swift */; };
+		0DCA4C4229BBABD400F78368 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DCA4C2329BBABD400F78368 /* SettingsView.swift */; };
+		0DCA4C4329BBABD400F78368 /* ApplicationSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DCA4C2429BBABD400F78368 /* ApplicationSettingsView.swift */; };
+		0DCA4C4429BBABD400F78368 /* CountdownsSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DCA4C2529BBABD400F78368 /* CountdownsSettingsView.swift */; };
+		0DCA4C4529BBABD400F78368 /* IndicationsSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DCA4C2629BBABD400F78368 /* IndicationsSettingsView.swift */; };
+		0DCA4C4629BBABD400F78368 /* MacOSPadding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DCA4C2829BBABD400F78368 /* MacOSPadding.swift */; };
+		0DCA4C4729BBABD400F78368 /* TimeSliced.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DCA4C2929BBABD400F78368 /* TimeSliced.swift */; };
+		0DCA4C4829BBABD400F78368 /* AddCountdownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DCA4C2A29BBABD400F78368 /* AddCountdownView.swift */; };
+		0DCA4C4929BBABD400F78368 /* OverrideDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DCA4C2B29BBABD400F78368 /* OverrideDay.swift */; };
+		0DCA4C4A29BBABD400F78368 /* OverviewCountdowns.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DCA4C2C29BBABD400F78368 /* OverviewCountdowns.swift */; };
+		0DCA4C4B29BBABD400F78368 /* FocusModeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DCA4C2D29BBABD400F78368 /* FocusModeView.swift */; };
+		0DCA4C4C29BBABD400F78368 /* OverviewSingleCountdownsWithAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DCA4C2F29BBABD400F78368 /* OverviewSingleCountdownsWithAction.swift */; };
+		0DCA4C4D29BBABD400F78368 /* OverviewDailyCountdownsTableCellWithAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DCA4C3029BBABD400F78368 /* OverviewDailyCountdownsTableCellWithAction.swift */; };
+		0DCA4C4E29BBABD400F78368 /* FullSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DCA4C3229BBABD400F78368 /* FullSize.swift */; };
+		0DCA4C4F29BBABD400F78368 /* Tiny.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DCA4C3329BBABD400F78368 /* Tiny.swift */; };
+		0DCA4C5029BBABD400F78368 /* Small.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DCA4C3429BBABD400F78368 /* Small.swift */; };
+		0DCA4C5129BBABD400F78368 /* CommonViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DCA4C3629BBABD400F78368 /* CommonViewExtensions.swift */; };
+		0DCA4C5229BBABD400F78368 /* FormButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DCA4C3829BBABD400F78368 /* FormButton.swift */; };
+		0DCA4C5329BBABD400F78368 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DCA4C3929BBABD400F78368 /* MainView.swift */; };
+		0DCA4C5429BBABD400F78368 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DCA4C3B29BBABD400F78368 /* DataController.swift */; };
+		0DCA4C5529BBABD400F78368 /* MacMenubar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DCA4C3C29BBABD400F78368 /* MacMenubar.swift */; };
+		0DCA4C5629BBABD400F78368 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DCA4C3D29BBABD400F78368 /* AppDelegate.swift */; };
+		0DCA4C5729BBABD400F78368 /* Countdowns.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DCA4C3E29BBABD400F78368 /* Countdowns.swift */; };
+		0DCA4C5929BBABE000F78368 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0DCA4C5829BBABE000F78368 /* Colors.xcassets */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		0DCA4C0429BBAB3400F78368 /* KnotClock.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KnotClock.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		0DCA4C0729BBAB3400F78368 /* KnotClockApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KnotClockApp.swift; sourceTree = "<group>"; };
+		0DCA4C0C29BBAB3400F78368 /* KnotClock.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = KnotClock.xcdatamodel; sourceTree = "<group>"; };
+		0DCA4C1029BBAB3400F78368 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		0DCA4C1229BBAB3400F78368 /* KnotClock.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = KnotClock.entitlements; sourceTree = "<group>"; };
+		0DCA4C1429BBAB3400F78368 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		0DCA4C1B29BBABB400F78368 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		0DCA4C1E29BBABD400F78368 /* Countdown.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Countdown.swift; sourceTree = "<group>"; };
+		0DCA4C1F29BBABD400F78368 /* Preferences.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Preferences.swift; sourceTree = "<group>"; };
+		0DCA4C2029BBABD400F78368 /* HideDaily.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HideDaily.swift; sourceTree = "<group>"; };
+		0DCA4C2329BBABD400F78368 /* SettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		0DCA4C2429BBABD400F78368 /* ApplicationSettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationSettingsView.swift; sourceTree = "<group>"; };
+		0DCA4C2529BBABD400F78368 /* CountdownsSettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountdownsSettingsView.swift; sourceTree = "<group>"; };
+		0DCA4C2629BBABD400F78368 /* IndicationsSettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IndicationsSettingsView.swift; sourceTree = "<group>"; };
+		0DCA4C2829BBABD400F78368 /* MacOSPadding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MacOSPadding.swift; sourceTree = "<group>"; };
+		0DCA4C2929BBABD400F78368 /* TimeSliced.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeSliced.swift; sourceTree = "<group>"; };
+		0DCA4C2A29BBABD400F78368 /* AddCountdownView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddCountdownView.swift; sourceTree = "<group>"; };
+		0DCA4C2B29BBABD400F78368 /* OverrideDay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverrideDay.swift; sourceTree = "<group>"; };
+		0DCA4C2C29BBABD400F78368 /* OverviewCountdowns.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverviewCountdowns.swift; sourceTree = "<group>"; };
+		0DCA4C2D29BBABD400F78368 /* FocusModeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FocusModeView.swift; sourceTree = "<group>"; };
+		0DCA4C2F29BBABD400F78368 /* OverviewSingleCountdownsWithAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverviewSingleCountdownsWithAction.swift; sourceTree = "<group>"; };
+		0DCA4C3029BBABD400F78368 /* OverviewDailyCountdownsTableCellWithAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverviewDailyCountdownsTableCellWithAction.swift; sourceTree = "<group>"; };
+		0DCA4C3229BBABD400F78368 /* FullSize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FullSize.swift; sourceTree = "<group>"; };
+		0DCA4C3329BBABD400F78368 /* Tiny.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tiny.swift; sourceTree = "<group>"; };
+		0DCA4C3429BBABD400F78368 /* Small.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Small.swift; sourceTree = "<group>"; };
+		0DCA4C3629BBABD400F78368 /* CommonViewExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonViewExtensions.swift; sourceTree = "<group>"; };
+		0DCA4C3829BBABD400F78368 /* FormButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormButton.swift; sourceTree = "<group>"; };
+		0DCA4C3929BBABD400F78368 /* MainView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		0DCA4C3B29BBABD400F78368 /* DataController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
+		0DCA4C3C29BBABD400F78368 /* MacMenubar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MacMenubar.swift; sourceTree = "<group>"; };
+		0DCA4C3D29BBABD400F78368 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		0DCA4C3E29BBABD400F78368 /* Countdowns.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Countdowns.swift; sourceTree = "<group>"; };
+		0DCA4C5829BBABE000F78368 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		0DCA4C0129BBAB3400F78368 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		0DCA4BFB29BBAB3400F78368 = {
+			isa = PBXGroup;
+			children = (
+				0DCA4C0629BBAB3400F78368 /* KnotClock */,
+				0DCA4C0529BBAB3400F78368 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		0DCA4C0529BBAB3400F78368 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				0DCA4C0429BBAB3400F78368 /* KnotClock.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		0DCA4C0629BBAB3400F78368 /* KnotClock */ = {
+			isa = PBXGroup;
+			children = (
+				0DCA4C0729BBAB3400F78368 /* KnotClockApp.swift */,
+				0DCA4C1B29BBABB400F78368 /* Constants.swift */,
+				0DCA4C3A29BBABD400F78368 /* Classes */,
+				0DCA4C1D29BBABD400F78368 /* Structs */,
+				0DCA4C2129BBABD400F78368 /* Views */,
+				0DCA4C0B29BBAB3400F78368 /* KnotClock.xcdatamodeld */,
+				0DCA4C1029BBAB3400F78368 /* Assets.xcassets */,
+				0DCA4C5829BBABE000F78368 /* Colors.xcassets */,
+				0DCA4C1229BBAB3400F78368 /* KnotClock.entitlements */,
+				0DCA4C1329BBAB3400F78368 /* Preview Content */,
+			);
+			path = KnotClock;
+			sourceTree = "<group>";
+		};
+		0DCA4C1329BBAB3400F78368 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				0DCA4C1429BBAB3400F78368 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		0DCA4C1D29BBABD400F78368 /* Structs */ = {
+			isa = PBXGroup;
+			children = (
+				0DCA4C1E29BBABD400F78368 /* Countdown.swift */,
+				0DCA4C1F29BBABD400F78368 /* Preferences.swift */,
+				0DCA4C2029BBABD400F78368 /* HideDaily.swift */,
+			);
+			path = Structs;
+			sourceTree = "<group>";
+		};
+		0DCA4C2129BBABD400F78368 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				0DCA4C3929BBABD400F78368 /* MainView.swift */,
+				0DCA4C2A29BBABD400F78368 /* AddCountdownView.swift */,
+				0DCA4C2B29BBABD400F78368 /* OverrideDay.swift */,
+				0DCA4C2C29BBABD400F78368 /* OverviewCountdowns.swift */,
+				0DCA4C2D29BBABD400F78368 /* FocusModeView.swift */,
+				0DCA4C2E29BBABD400F78368 /* SubViews */,
+				0DCA4C3529BBABD400F78368 /* Extensions */,
+				0DCA4C2229BBABD400F78368 /* Settings */,
+				0DCA4C2729BBABD400F78368 /* Modifiers */,
+				0DCA4C3729BBABD400F78368 /* Styles */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		0DCA4C2229BBABD400F78368 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				0DCA4C2329BBABD400F78368 /* SettingsView.swift */,
+				0DCA4C2429BBABD400F78368 /* ApplicationSettingsView.swift */,
+				0DCA4C2529BBABD400F78368 /* CountdownsSettingsView.swift */,
+				0DCA4C2629BBABD400F78368 /* IndicationsSettingsView.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		0DCA4C2729BBABD400F78368 /* Modifiers */ = {
+			isa = PBXGroup;
+			children = (
+				0DCA4C2829BBABD400F78368 /* MacOSPadding.swift */,
+				0DCA4C2929BBABD400F78368 /* TimeSliced.swift */,
+			);
+			path = Modifiers;
+			sourceTree = "<group>";
+		};
+		0DCA4C2E29BBABD400F78368 /* SubViews */ = {
+			isa = PBXGroup;
+			children = (
+				0DCA4C2F29BBABD400F78368 /* OverviewSingleCountdownsWithAction.swift */,
+				0DCA4C3029BBABD400F78368 /* OverviewDailyCountdownsTableCellWithAction.swift */,
+				0DCA4C3129BBABD400F78368 /* CountdownViews */,
+			);
+			path = SubViews;
+			sourceTree = "<group>";
+		};
+		0DCA4C3129BBABD400F78368 /* CountdownViews */ = {
+			isa = PBXGroup;
+			children = (
+				0DCA4C3229BBABD400F78368 /* FullSize.swift */,
+				0DCA4C3329BBABD400F78368 /* Tiny.swift */,
+				0DCA4C3429BBABD400F78368 /* Small.swift */,
+			);
+			path = CountdownViews;
+			sourceTree = "<group>";
+		};
+		0DCA4C3529BBABD400F78368 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				0DCA4C3629BBABD400F78368 /* CommonViewExtensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		0DCA4C3729BBABD400F78368 /* Styles */ = {
+			isa = PBXGroup;
+			children = (
+				0DCA4C3829BBABD400F78368 /* FormButton.swift */,
+			);
+			path = Styles;
+			sourceTree = "<group>";
+		};
+		0DCA4C3A29BBABD400F78368 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				0DCA4C3B29BBABD400F78368 /* DataController.swift */,
+				0DCA4C3C29BBABD400F78368 /* MacMenubar.swift */,
+				0DCA4C3D29BBABD400F78368 /* AppDelegate.swift */,
+				0DCA4C3E29BBABD400F78368 /* Countdowns.swift */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		0DCA4C0329BBAB3400F78368 /* KnotClock */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0DCA4C1829BBAB3400F78368 /* Build configuration list for PBXNativeTarget "KnotClock" */;
+			buildPhases = (
+				0DCA4C0029BBAB3400F78368 /* Sources */,
+				0DCA4C0129BBAB3400F78368 /* Frameworks */,
+				0DCA4C0229BBAB3400F78368 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = KnotClock;
+			productName = KnotClock;
+			productReference = 0DCA4C0429BBAB3400F78368 /* KnotClock.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		0DCA4BFC29BBAB3400F78368 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1420;
+				LastUpgradeCheck = 1420;
+				TargetAttributes = {
+					0DCA4C0329BBAB3400F78368 = {
+						CreatedOnToolsVersion = 14.2;
+					};
+				};
+			};
+			buildConfigurationList = 0DCA4BFF29BBAB3400F78368 /* Build configuration list for PBXProject "KnotClock" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 0DCA4BFB29BBAB3400F78368;
+			productRefGroup = 0DCA4C0529BBAB3400F78368 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				0DCA4C0329BBAB3400F78368 /* KnotClock */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		0DCA4C0229BBAB3400F78368 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0DCA4C5929BBABE000F78368 /* Colors.xcassets in Resources */,
+				0DCA4C1529BBAB3400F78368 /* Preview Assets.xcassets in Resources */,
+				0DCA4C1129BBAB3400F78368 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		0DCA4C0029BBAB3400F78368 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0DCA4C4929BBABD400F78368 /* OverrideDay.swift in Sources */,
+				0DCA4C5329BBABD400F78368 /* MainView.swift in Sources */,
+				0DCA4C4329BBABD400F78368 /* ApplicationSettingsView.swift in Sources */,
+				0DCA4C4229BBABD400F78368 /* SettingsView.swift in Sources */,
+				0DCA4C4629BBABD400F78368 /* MacOSPadding.swift in Sources */,
+				0DCA4C4E29BBABD400F78368 /* FullSize.swift in Sources */,
+				0DCA4C1C29BBABB400F78368 /* Constants.swift in Sources */,
+				0DCA4C0829BBAB3400F78368 /* KnotClockApp.swift in Sources */,
+				0DCA4C5529BBABD400F78368 /* MacMenubar.swift in Sources */,
+				0DCA4C5129BBABD400F78368 /* CommonViewExtensions.swift in Sources */,
+				0DCA4C4A29BBABD400F78368 /* OverviewCountdowns.swift in Sources */,
+				0DCA4C5729BBABD400F78368 /* Countdowns.swift in Sources */,
+				0DCA4C5429BBABD400F78368 /* DataController.swift in Sources */,
+				0DCA4C5029BBABD400F78368 /* Small.swift in Sources */,
+				0DCA4C4029BBABD400F78368 /* Preferences.swift in Sources */,
+				0DCA4C4429BBABD400F78368 /* CountdownsSettingsView.swift in Sources */,
+				0DCA4C4C29BBABD400F78368 /* OverviewSingleCountdownsWithAction.swift in Sources */,
+				0DCA4C5229BBABD400F78368 /* FormButton.swift in Sources */,
+				0DCA4C4829BBABD400F78368 /* AddCountdownView.swift in Sources */,
+				0DCA4C0D29BBAB3400F78368 /* KnotClock.xcdatamodeld in Sources */,
+				0DCA4C3F29BBABD400F78368 /* Countdown.swift in Sources */,
+				0DCA4C4D29BBABD400F78368 /* OverviewDailyCountdownsTableCellWithAction.swift in Sources */,
+				0DCA4C5629BBABD400F78368 /* AppDelegate.swift in Sources */,
+				0DCA4C4129BBABD400F78368 /* HideDaily.swift in Sources */,
+				0DCA4C4729BBABD400F78368 /* TimeSliced.swift in Sources */,
+				0DCA4C4F29BBABD400F78368 /* Tiny.swift in Sources */,
+				0DCA4C4B29BBABD400F78368 /* FocusModeView.swift in Sources */,
+				0DCA4C4529BBABD400F78368 /* IndicationsSettingsView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		0DCA4C1629BBAB3400F78368 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		0DCA4C1729BBAB3400F78368 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+			};
+			name = Release;
+		};
+		0DCA4C1929BBAB3400F78368 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = KnotClock/KnotClock.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"KnotClock/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
+				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 13.1;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nascv.KnotClock;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		0DCA4C1A29BBAB3400F78368 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = KnotClock/KnotClock.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"KnotClock/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
+				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 13.1;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nascv.KnotClock;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		0DCA4BFF29BBAB3400F78368 /* Build configuration list for PBXProject "KnotClock" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0DCA4C1629BBAB3400F78368 /* Debug */,
+				0DCA4C1729BBAB3400F78368 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0DCA4C1829BBAB3400F78368 /* Build configuration list for PBXNativeTarget "KnotClock" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0DCA4C1929BBAB3400F78368 /* Debug */,
+				0DCA4C1A29BBAB3400F78368 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		0DCA4C0B29BBAB3400F78368 /* KnotClock.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				0DCA4C0C29BBAB3400F78368 /* KnotClock.xcdatamodel */,
+			);
+			currentVersion = 0DCA4C0C29BBAB3400F78368 /* KnotClock.xcdatamodel */;
+			path = KnotClock.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 0DCA4BFC29BBAB3400F78368 /* Project object */;
+}

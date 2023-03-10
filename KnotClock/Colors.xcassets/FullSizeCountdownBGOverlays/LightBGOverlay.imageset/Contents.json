@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "LightBGOverlay.png",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

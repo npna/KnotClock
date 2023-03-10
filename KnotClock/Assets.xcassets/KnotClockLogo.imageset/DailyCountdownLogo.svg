@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Created with Vectornator (http://vectornator.io/) -->
+<svg height="100%" stroke-miterlimit="10" style="fill-rule:nonzero;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;" version="1.1" viewBox="0 0 1024 1024" width="100%" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<defs>
+<linearGradient gradientTransform="matrix(1 0 0 1 0 0)" gradientUnits="userSpaceOnUse" id="LinearGradient" x1="571.214" x2="571.558" y1="1103.79" y2="-16.708">
+<stop offset="0" stop-color="#3d88de"/>
+<stop offset="1" stop-color="#1ac9fc"/>
+</linearGradient>
+<linearGradient gradientTransform="matrix(-0.717549 -0.696508 0.696508 -0.717549 522.773 1236)" gradientUnits="userSpaceOnUse" id="LinearGradient_2" x1="200" x2="824" y1="512" y2="512">
+<stop offset="0" stop-color="#ffffff"/>
+<stop offset="1" stop-color="#ccced3"/>
+</linearGradient>
+<linearGradient gradientTransform="matrix(1.31475 -3.64916e-17 0 1.31475 -160.646 -161.15)" gradientUnits="userSpaceOnUse" id="LinearGradient_3" x1="300" x2="466.659" y1="512" y2="293.94">
+<stop offset="0.004684" stop-color="#505a64"/>
+<stop offset="1" stop-color="#424040"/>
+</linearGradient>
+</defs>
+<g id="Background">
+<path d="M285.4 100L738.6 100C840.994 100 924 183.006 924 285.4L924 738.6C924 840.994 840.994 924 738.6 924L285.4 924C183.006 924 100 840.994 100 738.6L100 285.4C100 183.006 183.006 100 285.4 100Z" fill="url(#LinearGradient)" fill-rule="nonzero" opacity="1" stroke="none"/>
+</g>
+<g id="Circle">
+<path d="M735.875 729.31C615.858 852.953 418.333 855.893 294.69 735.875C171.047 615.858 168.107 418.333 288.125 294.69C408.142 171.047 605.667 168.107 729.31 288.125C852.953 408.142 855.893 605.667 735.875 729.31Z" fill="url(#LinearGradient_2)" fill-rule="nonzero" opacity="1" stroke="none"/>
+</g>
+<g id="DailyCountdown">
+<path d="M233.778 512C233.778 358.064 358.568 233.274 512.504 233.274C518.459 233.274 509.648 508.993 515.51 509.361C528.473 510.174 597.213 524.514 652.189 533.436C655.892 534.037 787.259 559.465 787.019 560.832C764.065 691.647 649.897 790.726 512.504 790.726C358.568 790.726 233.778 665.936 233.778 512Z" fill="url(#LinearGradient_3)" fill-rule="nonzero" opacity="1" stroke="none"/>
+</g>
+</svg>

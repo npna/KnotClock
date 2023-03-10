@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "FullSizeCountdownDarkBGOverlay.png",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
