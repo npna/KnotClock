@@ -39,6 +39,7 @@
 		0DCA4C5629BBABD400F78368 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DCA4C3D29BBABD400F78368 /* AppDelegate.swift */; };
 		0DCA4C5729BBABD400F78368 /* Countdowns.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DCA4C3E29BBABD400F78368 /* Countdowns.swift */; };
 		0DCA4C5929BBABE000F78368 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0DCA4C5829BBABE000F78368 /* Colors.xcassets */; };
+		0DE574C129BD3C5A005BDCA4 /* ApplyColorScheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DE574C029BD3C5A005BDCA4 /* ApplyColorScheme.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -76,6 +77,7 @@
 		0DCA4C3D29BBABD400F78368 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0DCA4C3E29BBABD400F78368 /* Countdowns.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Countdowns.swift; sourceTree = "<group>"; };
 		0DCA4C5829BBABE000F78368 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
+		0DE574C029BD3C5A005BDCA4 /* ApplyColorScheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyColorScheme.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -172,6 +174,7 @@
 			isa = PBXGroup;
 			children = (
 				0DCA4C2829BBABD400F78368 /* MacOSPadding.swift */,
+				0DE574C029BD3C5A005BDCA4 /* ApplyColorScheme.swift */,
 				0DCA4C2929BBABD400F78368 /* TimeSliced.swift */,
 				0DA02AE429BD1DC200CEBB8F /* ConditionalModifier.swift */,
 			);
@@ -313,6 +316,7 @@
 				0DCA4C4029BBABD400F78368 /* Preferences.swift in Sources */,
 				0DCA4C4429BBABD400F78368 /* CountdownsSettingsView.swift in Sources */,
 				0DA02AE529BD1DC200CEBB8F /* ConditionalModifier.swift in Sources */,
+				0DE574C129BD3C5A005BDCA4 /* ApplyColorScheme.swift in Sources */,
 				0DCA4C4C29BBABD400F78368 /* OverviewSingleCountdownsWithAction.swift in Sources */,
 				0DCA4C5229BBABD400F78368 /* FormButton.swift in Sources */,
 				0DCA4C4829BBABD400F78368 /* AddCountdownView.swift in Sources */,

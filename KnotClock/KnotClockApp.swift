@@ -21,31 +21,34 @@ struct KnotClockApp: App {
     }
     #endif
     
-    var body: some Scene {
-        let mainView = MainView()
+    func mainView(isInMenubar: Bool = false) -> some View {
+        return MainView(isInMenubar: isInMenubar)
             .environment(\.managedObjectContext, dataController.container.viewContext)
             .environmentObject(countdowns)
-        
+            .applyColorScheme()
+    }
+    
+    var body: some Scene {
         #if os(macOS)
         Window(K.appName, id: K.appName) {
-            mainView
+            mainView()
                 .frame(minWidth: K.MacWindowSizes.Main.minWidth, maxWidth: .infinity, minHeight: K.MacWindowSizes.Main.minHeight, maxHeight: .infinity)
         }.defaultSize(width: K.MacWindowSizes.Main.minWidth, height: K.MacWindowSizes.Main.minHeight)
         
         Settings {
-            SettingsView()
+            SettingsView().applyColorScheme()
                 .frame(minWidth: K.MacWindowSizes.Settings.minWidth, maxWidth: .infinity, minHeight: K.MacWindowSizes.Settings.minHeight, maxHeight: .infinity)
         }.defaultSize(width: K.MacWindowSizes.Settings.minWidth, height: K.MacWindowSizes.Settings.minHeight)
         
         MenuBarExtra(isInserted: $preferences.x.showMenubarExtra) {
-            MainView(isInMenubar: true)
+            mainView(isInMenubar: true)
                 .frame(minWidth: K.MacWindowSizes.Menubar.minWidth)
         } label: {
             macMenubar.menubarIcon()
         }
         .menuBarExtraStyle(.window)
         #else
-        WindowGroup { mainView }
+        WindowGroup { mainView() }
         #endif
     }
 }

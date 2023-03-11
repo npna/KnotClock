@@ -79,9 +79,17 @@ struct ApplicationSettingsView: View {
                 .padding(.bottom)
                 #endif
                 
+                Picker("Theme", selection: $preferences.x.preferredTheme) {
+                    ForEach(Theme.allCases) { theme in
+                        Text(theme.rawValue).tag(theme)
+                    }
+                }
+                .pickerStyle(.segmented)
+                
                 Button("Reset All Settings") {
                     showResetSettingsConfirmation = true
                 }
+                .padding(.top)
             }
             .confirmationDialog("Are you sure you want to reset settings?", isPresented: $showResetSettingsConfirmation) {
                 Button("Reset Everything") {

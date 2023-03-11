@@ -5,7 +5,7 @@
 //  Created by NA on 3/6/23.
 //
 
-import Foundation
+import SwiftUI
 
 struct Preferences<DefaultUserPreferences: Codable> {
     var x: DefaultUserPreferences
@@ -35,6 +35,8 @@ struct DefaultUserPreferences: Codable {
     var showMenubarExtra = true
     var showDockIcon = true
     var overrideDay = "none"
+    
+    var preferredTheme: Theme = .system
     
     var currentCountdownStyle: UpcommingAndExpiredSettings = .fullSize
     
@@ -105,6 +107,25 @@ enum ColorSets: String, Codable, CaseIterable, Identifiable {
     case yellow = "AppYellow"
     
     var id: String { self.rawValue }
+}
+
+enum Theme: String, Codable, CaseIterable, Identifiable {
+    case system = "System"
+    case dark = "Dark Mode"
+    case light = "Light Mode"
+    
+    var id: String { self.rawValue }
+    
+    var colorScheme: ColorScheme? {
+        switch self {
+        case .dark:
+            return ColorScheme.dark
+        case .light:
+            return ColorScheme.light
+        case .system:
+            return .none
+        }
+    }
 }
 
 extension Preferences: RawRepresentable {
