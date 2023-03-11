@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct AddCountdownView: View {
-    @Environment(\.managedObjectContext) var moc
     @Environment(\.dismiss) private var dismiss
     @State private var selectedTab: String
     @State private var title = ""
@@ -18,6 +17,7 @@ struct AddCountdownView: View {
     @State private var alertIsPresented = false
     @State private var alertMessage = ""
     
+    private let moc = DataController.context
     private var isInMenubar: Bool
     
     init(isInMenubar: Bool = false) {
