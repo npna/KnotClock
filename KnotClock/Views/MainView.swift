@@ -11,7 +11,7 @@ import Combine
 struct MainView: View {
     @Environment(\.managedObjectContext) var moc
     @StateObject private var countdowns = Countdowns.shared
-    @State private var showAddCountdownSheet = false
+    @State private var showAddCountdown = false
     @State private var showWeeklyOverviewSheet = false
     @State private var showOverrideDaySheet = false
     private var isInMenubar: Bool
@@ -41,13 +41,15 @@ struct MainView: View {
             .alert(countdowns.alertMessage, isPresented: $countdowns.showAlert) {
                 Button("OK"){}
             }
-            .sheet(isPresented: $showAddCountdownSheet, onDismiss: countdowns.refetchAllAndHandleNotifications) {
-                AddCountdownView(isInMenubar: isInMenubar)
+            .conditionalMofidier(!isInMenubar) { view in
+                view.sheet(isPresented: $showAddCountdown) {
+                    AddCountdownView(isInMenubar: isInMenubar)
+                }
             }
-            .sheet(isPresented: $showWeeklyOverviewSheet, onDismiss: countdowns.refetchAllAndHandleNotifications) {
+            .sheet(isPresented: $showWeeklyOverviewSheet) {
                 OverviewCountdowns()
             }
-            .sheet(isPresented: $showOverrideDaySheet, onDismiss: countdowns.refetchAllAndHandleNotifications) {
+            .sheet(isPresented: $showOverrideDaySheet) {
                 OverrideDay()
             }
             .onChange(of: preferences.x.refreshTimerInterval) { newValue in
@@ -68,7 +70,10 @@ struct MainView: View {
                 HStack {
                     Spacer()
                     Button("Add") {
-                        showAddCountdownSheet = true
+                        showAddCountdown = true
+                    }
+                    .popover(isPresented: $showAddCountdown) {
+                        AddCountdownView(isInMenubar: isInMenubar)
                     }
                     Button("Main Window") {
                         NSApp.activate(ignoringOtherApps: true)
@@ -218,7 +223,7 @@ struct MainView: View {
             }
             
             Button {
-                showAddCountdownSheet = true
+                showAddCountdown = true
             } label: {
                 Image(systemName: "plus")
             }

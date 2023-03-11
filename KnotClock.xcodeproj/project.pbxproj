@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0DA02AE529BD1DC200CEBB8F /* ConditionalModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DA02AE429BD1DC200CEBB8F /* ConditionalModifier.swift */; };
 		0DCA4C0829BBAB3400F78368 /* KnotClockApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DCA4C0729BBAB3400F78368 /* KnotClockApp.swift */; };
 		0DCA4C0D29BBAB3400F78368 /* KnotClock.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0DCA4C0B29BBAB3400F78368 /* KnotClock.xcdatamodeld */; };
 		0DCA4C1129BBAB3400F78368 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0DCA4C1029BBAB3400F78368 /* Assets.xcassets */; };
@@ -41,6 +42,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0DA02AE429BD1DC200CEBB8F /* ConditionalModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConditionalModifier.swift; sourceTree = "<group>"; };
 		0DCA4C0429BBAB3400F78368 /* KnotClock.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KnotClock.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0DCA4C0729BBAB3400F78368 /* KnotClockApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KnotClockApp.swift; sourceTree = "<group>"; };
 		0DCA4C0C29BBAB3400F78368 /* KnotClock.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = KnotClock.xcdatamodel; sourceTree = "<group>"; };
@@ -171,6 +173,7 @@
 			children = (
 				0DCA4C2829BBABD400F78368 /* MacOSPadding.swift */,
 				0DCA4C2929BBABD400F78368 /* TimeSliced.swift */,
+				0DA02AE429BD1DC200CEBB8F /* ConditionalModifier.swift */,
 			);
 			path = Modifiers;
 			sourceTree = "<group>";
@@ -309,6 +312,7 @@
 				0DCA4C5029BBABD400F78368 /* Small.swift in Sources */,
 				0DCA4C4029BBABD400F78368 /* Preferences.swift in Sources */,
 				0DCA4C4429BBABD400F78368 /* CountdownsSettingsView.swift in Sources */,
+				0DA02AE529BD1DC200CEBB8F /* ConditionalModifier.swift in Sources */,
 				0DCA4C4C29BBABD400F78368 /* OverviewSingleCountdownsWithAction.swift in Sources */,
 				0DCA4C5229BBABD400F78368 /* FormButton.swift in Sources */,
 				0DCA4C4829BBABD400F78368 /* AddCountdownView.swift in Sources */,
