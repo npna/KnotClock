@@ -64,7 +64,7 @@ struct FullSize: View {
         .onAppear {
             checkIsShowing()
         }
-        .frame(minWidth: isInMenubar ? 340 : .none)
+        .frame(minWidth: isInMenubar ? K.MacWindowSizes.Menubar.minWidth - K.MacWindowSizes.countdownVStackWidthSubtract : .none)
     }
     
     func checkIsShowing() {

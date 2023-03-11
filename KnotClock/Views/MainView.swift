@@ -117,7 +117,6 @@ struct MainView: View {
                     countdownsView(for: .upcomming)
                 }
                 .padding(3)
-                .frame(minWidth: K.MacWindowSizes.Menubar.minWidth - K.MacWindowSizes.countdownVStackWidthSubtract)
             }
         }
         
@@ -129,7 +128,6 @@ struct MainView: View {
                     countdownsView(for: .expired)
                 }
                 .padding(3)
-                .frame(minWidth: K.MacWindowSizes.Menubar.minWidth - K.MacWindowSizes.countdownVStackWidthSubtract)
             }
         }
     }
