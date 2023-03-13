@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct FullSize: View {
-    @AppStorage(K.userPreferencesKey) var preferences = Preferences(x: DefaultUserPreferences())
+    @AppStorage(K.StorageKeys.userPreferences) var preferences = Preferences(x: DefaultUserPreferences())
     
     @Environment(\.colorScheme) var colorScheme
     @State private var countdown: Countdown
@@ -31,7 +31,15 @@ struct FullSize: View {
                 HStack {
                     let firstLetter = countdown.title.prefix(1).lowercased()
                     Image(systemName: "\(firstLetter).square.fill").font(.largeTitle)
-                    Text(countdown.title).bold().lineLimit(1)
+                    
+                    if countdown.isForTomorrow {
+                        VStack(alignment: .leading) {
+                            Text(countdown.title).bold().lineLimit(1)
+                            Text("(tomorrow)").font(.footnote).bold()
+                        }
+                    } else {
+                        Text(countdown.title).bold().lineLimit(1)
+                    }
                     
                     Spacer()
                     

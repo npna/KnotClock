@@ -10,7 +10,7 @@ import SwiftUI
 struct FocusModeView: View {
     @ObservedObject private var countdowns = Countdowns.shared
     @Environment(\.dismiss) private var dismiss
-    @AppStorage(K.userPreferencesKey) var preferences = Preferences(x: DefaultUserPreferences())
+    @AppStorage(K.StorageKeys.userPreferences) var preferences = Preferences(x: DefaultUserPreferences())
     private var countdown: Countdown? = nil
     
     @State private var timer = Timer.publish(every: 9.5, on: .main, in: .common).autoconnect()

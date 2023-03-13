@@ -14,7 +14,7 @@ struct KnotClockApp: App {
     
     #if os(macOS)
     @StateObject private var macMenubar = MacMenubar()
-    @AppStorage(K.userPreferencesKey) var preferences = Preferences(x: DefaultUserPreferences())
+    @AppStorage(K.StorageKeys.userPreferences) var preferences = Preferences(x: DefaultUserPreferences())
     @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     init() {
         NSApplication.shared.setActivationPolicy(preferences.x.showDockIcon ? .regular : .accessory)

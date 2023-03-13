@@ -8,33 +8,11 @@
 import SwiftUI
 
 struct CountdownsSettingsView: View {
-    @AppStorage(K.userPreferencesKey) var preferences = Preferences(x: DefaultUserPreferences())
+    @AppStorage(K.StorageKeys.userPreferences) var preferences = Preferences(x: DefaultUserPreferences())
     
     var body: some View {
         scrollViewOnMac {
             Form {
-                Group {
-                    Section {
-                        Picker("Timer Accuracy", selection: $preferences.x.refreshTimerInterval) {
-                            ForEach(K.timerAccuracyOptions, id: \.1) { (title, time) in
-                                let hidesSeconds = (time >= K.refreshThresholdHideSeconds) ? " - Hides seconds" : ""
-                                Text("\(title) (~\(time.formatted()) seconds)\(hidesSeconds)").tag(time)
-                            }
-                        }
-                        Text("Timers \(K.refreshThresholdHideSeconds.formatted()) and above hide \"seconds\" part in countdown.").font(.footnote)
-                        Text("Higher accuracy consumes more power.").font(.footnote)
-                    }
-                    
-                    Toggle("Show Hour and Minute after they reach zero", isOn: $preferences.x.showZeroHourMinute)
-                        .disabled(preferences.x.refreshTimerInterval >= K.refreshThresholdHideSeconds)
-                    
-                    if preferences.x.refreshTimerInterval >= K.refreshThresholdHideSeconds {
-                        Text("This option is disabled when Timer is \(K.refreshThresholdHideSeconds.formatted())+ seconds.").font(.footnote)
-                    }
-                    
-                    macOSDevider()
-                }
-                
                 Group {
                     Section("Current Countdown(s)") {
                         Picker("List Type", selection: $preferences.x.currentCountdownStyle) {
@@ -109,6 +87,20 @@ struct CountdownsSettingsView: View {
                         Text("Always").tag(-1)
                     }
                     .onChange(of: preferences.x.includeSingleCountdownsInListSecondsEarlier) { _ in
+                        Countdowns.shared.refetchAll()
+                    }
+                    
+                    Text("How much earlier to include tomorrow's daily countdowns")
+                    Picker("", selection: $preferences.x.includeTomorrowDailiesInTodaySecondsEarlier) {
+                        Text("Never (only after the day changes)").tag(0)
+                        Text("30 minutes before the day ends").tag(1800)
+                        Text("1 hour before the day ends").tag(3600 * 1)
+                        Text("2 hours before the day ends").tag(3600 * 2)
+                        Text("6 hours before the day ends").tag(3600 * 6)
+                        Text("12 hours before the day ends").tag(3600 * 12)
+                        Text("Always (show today and tomorrow)").tag(3600 * 24)
+                    }
+                    .onChange(of: preferences.x.includeTomorrowDailiesInTodaySecondsEarlier) { _ in
                         Countdowns.shared.refetchAll()
                     }
                 }

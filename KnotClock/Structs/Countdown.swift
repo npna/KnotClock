@@ -14,7 +14,8 @@ struct Countdown: Identifiable, Equatable {
     let title: String
     let category: CountdownCategory
     let time: Int
-        
+    var isForTomorrow: Bool = false
+    
     var entityName: String {
         (self.category == .daily) ? "Daily" : "Single"
     }
@@ -36,11 +37,15 @@ struct Countdown: Identifiable, Equatable {
     }
     
     var remainingSeconds: Int {
+        if isForTomorrow {
+            return (86400 - Countdown.getTimeAsSeconds()) + time
+        }
+        
         switch category {
         case .daily:
-            return Int(time) - Countdown.getTimeAsSeconds()
+            return time - Countdown.getTimeAsSeconds()
         case .single:
-            return Int(time) - Int(Date().timeIntervalSince1970)
+            return time - Int(Date().timeIntervalSince1970)
         }
     }
     

@@ -11,7 +11,7 @@ import ServiceManagement
 #endif
 
 struct ApplicationSettingsView: View {
-    @AppStorage(K.userPreferencesKey) var preferences = Preferences(x: DefaultUserPreferences())
+    @AppStorage(K.StorageKeys.userPreferences) var preferences = Preferences(x: DefaultUserPreferences())
 
     @State private var showResetSettingsConfirmation = false
     @State private var showAlert = false
@@ -76,8 +76,29 @@ struct ApplicationSettingsView: View {
                             }
                         }
                 }
-                .padding(.bottom)
+                
+                macOSDevider()
                 #endif
+                
+                Section {
+                    Picker("Timer Accuracy", selection: $preferences.x.refreshTimerInterval) {
+                        ForEach(K.timerAccuracyOptions, id: \.1) { (title, time) in
+                            let hidesSeconds = (time >= K.refreshThresholdHideSeconds) ? " - Hides seconds" : ""
+                            Text("\(title) (~\(time.formatted()) seconds)\(hidesSeconds)").tag(time)
+                        }
+                    }
+                    Text("Timers \(K.refreshThresholdHideSeconds.formatted()) and above hide \"seconds\" part in countdown.").font(.footnote)
+                    Text("Higher accuracy consumes more power.").font(.footnote)
+                }
+                
+                Toggle("Show Hour and Minute after they reach zero", isOn: $preferences.x.showZeroHourMinute)
+                    .disabled(preferences.x.refreshTimerInterval >= K.refreshThresholdHideSeconds)
+                
+                if preferences.x.refreshTimerInterval >= K.refreshThresholdHideSeconds {
+                    Text("This option is disabled when Timer is \(K.refreshThresholdHideSeconds.formatted())+ seconds.").font(.footnote)
+                }
+                
+                macOSDevider()
                 
                 Picker("Theme", selection: $preferences.x.preferredTheme) {
                     ForEach(Theme.allCases) { theme in

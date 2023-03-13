@@ -43,7 +43,7 @@ struct Tiny: View {
         #if os(macOS)
         .popover(isPresented: $showingPopover) {
             VStack {
-                Text(countdown.title).bold()
+                Text(countdown.isForTomorrow ? "\(countdown.title) - Tomorrow" : countdown.title).bold()
                 Text(remainingTime.formattedFullTime)
                     .font(.headline)
             }

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ApplyColorScheme: ViewModifier {
-    @AppStorage(K.userPreferencesKey) var preferences = Preferences(x: DefaultUserPreferences())
+    @AppStorage(K.StorageKeys.userPreferences) var preferences = Preferences(x: DefaultUserPreferences())
     
     @ViewBuilder
     func body(content: Content) -> some View {

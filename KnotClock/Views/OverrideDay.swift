@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct OverrideDay: View {
-    @AppStorage(K.userPreferencesKey) var preferences = Preferences(x: DefaultUserPreferences())
+    @AppStorage(K.StorageKeys.userPreferences) var preferences = Preferences(x: DefaultUserPreferences())
     @ObservedObject private var countdowns = Countdowns.shared
     @Environment(\.dismiss) private var dismiss
     

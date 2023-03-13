@@ -16,7 +16,7 @@ struct MainView: View {
     @State private var showOverrideDaySheet = false
     private var isInMenubar: Bool
     
-    @AppStorage(K.userPreferencesKey) var preferences = Preferences(x: DefaultUserPreferences())
+    @AppStorage(K.StorageKeys.userPreferences) var preferences = Preferences(x: DefaultUserPreferences())
     
     #if os(macOS)
     @Environment(\.openWindow) private var openWindow
@@ -92,6 +92,10 @@ struct MainView: View {
                 .padding(.bottom)
             }
             #endif
+            
+            if countdowns.notIncludingTomorrowTodayOverridden {
+                Text("Tomorrow's daily countdowns are excluded because today is overridden.").lineLimit(2).font(.footnote).padding(.horizontal).padding(.bottom)
+            }
         }
     }
     

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct Small: View {
-    @AppStorage(K.userPreferencesKey) var preferences = Preferences(x: DefaultUserPreferences())
+    @AppStorage(K.StorageKeys.userPreferences) var preferences = Preferences(x: DefaultUserPreferences())
     @State private var countdown: Countdown
     @Environment(\.colorScheme) var colorScheme
     private let remainingTime: RemainingTimeDetails
@@ -22,7 +22,14 @@ struct Small: View {
         let firstLetter = countdown.title.prefix(1).lowercased()
         HStack {
             Image(systemName: "\(firstLetter).square.fill").font(.footnote)
-            Text(countdown.title).lineLimit(1).bold()
+            if countdown.isForTomorrow {
+                HStack {
+                    Text("Tomorrow:").font(.footnote).bold().foregroundColor(.secondary)
+                    Text(countdown.title).lineLimit(1).bold()
+                }
+            } else {
+                Text(countdown.title).lineLimit(1).bold()
+            }
             
             Spacer()
             

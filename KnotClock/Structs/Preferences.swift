@@ -16,7 +16,7 @@ struct Preferences<DefaultUserPreferences: Codable> {
            let decoded = try? JSONDecoder().decode(DefaultUserPreferences.self, from: data)
         {
             let userDefaults = UserDefaults.standard
-            userDefaults.set(encoded, forKey: K.userPreferencesKey)
+            userDefaults.set(encoded, forKey: K.StorageKeys.userPreferences)
             userDefaults.synchronize()
             
             x = decoded
@@ -52,6 +52,7 @@ struct DefaultUserPreferences: Codable {
     var ciRemainingSecondsMaxValue = 7200
     
     var includeSingleCountdownsInListSecondsEarlier = 86400 * 1 // 86400 = 1 day
+    var includeTomorrowDailiesInTodaySecondsEarlier = 3600
     
     var firstCIEnabled = true
     var firstCIRemainingSeconds = 600

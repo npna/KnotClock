@@ -10,7 +10,7 @@ import UserNotifications
 
 struct IndicationsSettingsView: View {
     @StateObject private var countdowns = Countdowns.shared
-    @AppStorage(K.userPreferencesKey) var preferences = Preferences(x: DefaultUserPreferences())
+    @AppStorage(K.StorageKeys.userPreferences) var preferences = Preferences(x: DefaultUserPreferences())
     
     @State private var alertMessage = ""
     @State private var showAlert = false

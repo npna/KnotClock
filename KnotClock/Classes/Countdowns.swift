@@ -19,10 +19,12 @@ class Countdowns: ObservableObject {
     @Published var alertMessage = ""
     @Published var showAlert = false
     
+    @Published private(set) var notIncludingTomorrowTodayOverridden: Bool = false
     @Published private(set) var notificationsTotalCount = 0
     
-    @AppStorage(K.userPreferencesKey) var preferences = Preferences(x: DefaultUserPreferences())
-    @AppStorage("HideDaily") var hideDaily = HideDaily(list: [HiddenDailyItem()])
+    @AppStorage(K.StorageKeys.userPreferences) private var preferences = Preferences(x: DefaultUserPreferences())
+    @AppStorage(K.StorageKeys.hiddenDailies) private var hiddenDailies = HideDaily(list: [HiddenDailyItem()])
+    @AppStorage(K.StorageKeys.fetchedTomorrowDailies) private var fetchedTomorrowDailies: Bool = false
     
     private var fullList: [Countdown] = []
     private var timer: Timer? = nil
@@ -47,12 +49,19 @@ class Countdowns: ObservableObject {
         }
     }
     
-    func updateViewTimes() {
-        if lastReFetchDay != todayYMD() {
-            refetchAll()
-            #if DEBUG
-            print("Day has changed, refetched data.")
-            #endif
+    func updateViewTimes(dontRefetch: Bool = false) {
+        if !dontRefetch {
+            if lastReFetchDay != todayYMD() {
+                refetchAll()
+                #if DEBUG
+                print("Day has changed, refetched data.")
+                #endif
+            } else if shouldIncludeTomorrowDailies(inRangeOfRefreshTimerInterval: true) {
+                refetchAll()
+                #if DEBUG
+                print("Time to include tomorrow's daily countdowns.")
+                #endif
+            }
         }
         
         expired.removeAll()
@@ -216,6 +225,14 @@ class Countdowns: ObservableObject {
             fullList.append(Countdown(id: daily.id ?? UUID(), title: daily.title ?? "", category: .daily, time: Int(daily.time)))
         }
         
+        // For Tomorrow (based on preferences.x.includeTomorrowDailiesInTodaySecondsEarlier and if day isn't overridden)
+        if let includeTomorrow = getDailiesForTomorrow() {
+            for td in includeTomorrow {
+                // Should set isForTomorrow: true
+                fullList.append(Countdown(id: td.id ?? UUID(), title: td.title ?? "", category: .daily, time: Int(td.time), isForTomorrow: true))
+            }
+        }
+        
         for single in singles {
             fullList.append(Countdown(id: single.id ?? UUID(), title: single.title ?? "", category: .single, time: Int(single.deadlineEpoch)))
         }
@@ -226,7 +243,11 @@ class Countdowns: ObservableObject {
         
         lastReFetchDay = todayYMD()
         
-        updateViewTimes()
+        updateViewTimes(dontRefetch: true)
+        
+        #if DEBUG
+        print("Refetched All")
+        #endif
     }
     
     func refetchAllAndHandleNotifications() {
@@ -238,6 +259,62 @@ class Countdowns: ObservableObject {
         current.count == 0 && upcomming.count == 0 && expired.count == 0
     }
     
+    func shouldIncludeTomorrowDailies(inRangeOfRefreshTimerInterval: Bool = false) -> Bool {
+        let secondsEarlier = preferences.x.includeTomorrowDailiesInTodaySecondsEarlier
+        
+        guard secondsEarlier > 1 else {
+            return false
+        }
+        
+        let whenToIncludeTomorrow = 86400 - Double(secondsEarlier)
+        let currenTimeAsSeconds = Double(Countdown.getTimeAsSeconds())
+        
+        if inRangeOfRefreshTimerInterval {
+            let inUpperRange = whenToIncludeTomorrow < (currenTimeAsSeconds + preferences.x.refreshTimerInterval)
+            
+            if fetchedTomorrowDailies {
+                if !inUpperRange {
+                    fetchedTomorrowDailies = false
+                }
+                return false
+            }
+            
+            if whenToIncludeTomorrow > (currenTimeAsSeconds - preferences.x.refreshTimerInterval)
+            && inUpperRange
+            {
+                fetchedTomorrowDailies = true
+                return true
+            }
+        } else if currenTimeAsSeconds >= whenToIncludeTomorrow {
+            fetchedTomorrowDailies = true
+            return true
+        }
+        
+        return false
+    }
+    
+    func getDailiesForTomorrow() -> [Daily]? {
+        let weekdays = K.weekdays
+        notIncludingTomorrowTodayOverridden = false
+        
+        if let _ = todayIsOverriddenAs() {
+            if shouldIncludeTomorrowDailies() {
+                notIncludingTomorrowTodayOverridden = true
+            }
+            return nil
+        }
+        
+        guard shouldIncludeTomorrowDailies(),
+              let currentIndex = weekdays.firstIndex(of: todayName())
+        else {
+            return nil
+        }
+        
+        let nextIndex = (currentIndex + 1) % weekdays.count
+        
+        return getDailies(for: weekdays[nextIndex])
+    }
+    
     func getDailies(for day: String? = nil) -> [Daily] {
         var selectedDay = getDayName()
         
@@ -246,7 +323,7 @@ class Countdowns: ObservableObject {
         }
         
         let predicate = NSPredicate(format: "\(selectedDay.lowercased()) == %@", NSNumber(value: true))
-        
+
         let results = fetch(entityName: "Daily", predicate: predicate, sortBy: "time")
         return (results as? [Daily]) ?? []
     }
@@ -329,7 +406,7 @@ class Countdowns: ObservableObject {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = K.dateFormat
         
-        if dateFormatter.string(from: Date()) == separated[0] && K.weekdays.contains(separated[1]) && getDayName(checkForOverride: false) != separated[1] {
+        if dateFormatter.string(from: Date()) == separated[0] && K.weekdays.contains(separated[1]) && todayName() != separated[1] {
             return separated[1]
         }
         
@@ -337,16 +414,15 @@ class Countdowns: ObservableObject {
     }
     
     func getDayName(checkForOverride: Bool = true) -> String {
-        let calendar = Calendar.current
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = K.dateFormat
-        
-        let separated = preferences.x.overrideDay.components(separatedBy: "=")
-        
-        if checkForOverride, let dateChecker = dateFormatter.date(from: separated[0]), calendar.isDateInToday(dateChecker), K.weekdays.contains(separated[1].lowercased()) {
-            return separated[1]
+        if checkForOverride, let overridden = todayIsOverriddenAs() {
+            return overridden
+        } else {
+            return todayName()
         }
-        
+    }
+    
+    func todayName() -> String {
+        let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "EEEE"
         return dateFormatter.string(from: Date()).lowercased()
     }
@@ -361,18 +437,18 @@ class Countdowns: ObservableObject {
         if Int.random(in: 1...10) == 1 {
             clearOldHiddenDaily()
         }
-        hideDaily.list.append(HiddenDailyItem(id: id, ymd: todayYMD()))
+        hiddenDailies.list.append(HiddenDailyItem(id: id, ymd: todayYMD()))
         refetchAll()
     }
     
     func isDailyHidden(_ id: UUID?) -> Bool {
-        if let _ = hideDaily.list.firstIndex(where: { $0.id == id && $0.ymd == todayYMD() }) {
+        if let _ = hiddenDailies.list.firstIndex(where: { $0.id == id && $0.ymd == todayYMD() }) {
             return true
         }
         return false
     }
     
     func clearOldHiddenDaily() {
-        hideDaily.list.removeAll(where: { $0.ymd < todayYMD() })
+        hiddenDailies.list.removeAll(where: { $0.ymd < todayYMD() })
     }
 }

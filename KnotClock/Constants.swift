@@ -10,12 +10,13 @@ import SwiftUI
 typealias RemainingTimeDetails = (d: String, h: String, m: String, s: String, inSeconds: Int, category: CountdownCategory, formattedFullTime: String)
 
 struct K {
-    //
-    // -> Default Settings are in Preferences.swift file
-    static let userPreferencesKey = "userPreferences"
-    //
-    
     static let appName = "KnotClock"
+    
+    struct StorageKeys {
+        static let userPreferences = "userPreferences" // Default Settings are in Preferences.swift file
+        static let hiddenDailies = "HiddenDailyCountdowns"
+        static let fetchedTomorrowDailies = "FetchedDailyCountdownsForTomorrow"
+    }
     
     static let weekdays = ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"]
     static let weekdaysForSelection: [(name: String, isSelected: Bool)] = [
@@ -27,7 +28,6 @@ struct K {
         ("Saturday", false),
         ("Sunday", false)
     ]
-    
     
     static let refreshThresholdHideSeconds: TimeInterval = 20
     static let timerAccuracyOptions: [(title: String, time: TimeInterval)] = [
@@ -48,7 +48,7 @@ struct K {
     static let maxMainVStackHeight: CGFloat = 500
     
     static let minUpExSliderValue: Double = 1 // is Double to work with slider
-    static let maxUpExSliderValue: Double = 5
+    static let maxUpExSliderValue: Double = 10
     
     struct MacWindowSizes {
         struct Main {
@@ -58,7 +58,7 @@ struct K {
         
         struct Settings {
             static let minWidth: CGFloat = 550
-            static let minHeight: CGFloat = 650
+            static let minHeight: CGFloat = 600
         }
         
         struct Menubar {
