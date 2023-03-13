@@ -112,14 +112,15 @@ class Countdowns: ObservableObject {
     }
     
     func updateViewShouldRefetch(_ dontRefetch: Bool) -> Bool {
+        let shouldRefetch = (dontRefetch == false && (lastRefetchDay != todayYMD() || shouldIncludeTomorrowDailies(inRangeOfRefreshTimerInterval: true)))
         #if DEBUG
         if lastRefetchDay != todayYMD() {
             print("Day has changed, refetched data.")
-        } else {
+        } else if shouldRefetch {
             print("Time to include tomorrow's daily countdowns.")
         }
         #endif
-        return dontRefetch == false && (lastRefetchDay != todayYMD() || shouldIncludeTomorrowDailies(inRangeOfRefreshTimerInterval: true))
+        return shouldRefetch
     }
     
     func resetNotifications() {

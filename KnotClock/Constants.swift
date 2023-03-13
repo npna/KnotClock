@@ -27,9 +27,7 @@ struct K {
     static let notificationsLimit = 64
     
     static let menubarIconSize: CGFloat = 18
-    
-    static let maxMainVStackHeight: CGFloat = 500
-    
+        
     static let minUpExSliderValue: Double = 1 // is Double to work with slider
     static let maxUpExSliderValue: Double = 10
     
@@ -59,6 +57,10 @@ struct K {
         struct Settings {
             static let minWidth: CGFloat = 550
             static let minHeight: CGFloat = 600
+        }
+        
+        struct Overview {
+            static let maxWidth: CGFloat = 600
         }
         
         struct Menubar {

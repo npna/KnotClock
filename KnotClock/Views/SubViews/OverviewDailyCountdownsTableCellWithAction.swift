@@ -53,7 +53,7 @@ struct OverviewDailyCountdownTableCellWithAction: View {
         
         VStack(alignment: .leading) {
             HStack {
-                Text(dailyCountdown.title ?? "").bold().frame(maxWidth: 200).fixedSize(horizontal: true, vertical: false)
+                Text(dailyCountdown.title ?? "").bold().frame(maxWidth: 190).fixedSize(horizontal: true, vertical: false)
                 
                 actionButton("pencil.circle.fill", .blue) {
                     showingEditPopover = true
@@ -103,7 +103,7 @@ struct OverviewDailyCountdownTableCellWithAction: View {
         .alert(alertMessage, isPresented: $showingAlert) {
             Button("OK"){}
         }
-        .frame(maxWidth: 200, alignment: .leading)
+        .frame(maxWidth: 240, alignment: .leading)
         .padding(.horizontal)
     }
     

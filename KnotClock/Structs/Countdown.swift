@@ -100,13 +100,22 @@ struct Countdown: Identifiable, Equatable {
     
     static func convertTimeAsSecondsToDate(_ seconds: Int) -> Date? {
         let dhms = secondsToDHMS(seconds)
-        let dateComponents = Calendar.current.dateComponents([.year, .month, .day], from: .now)
+        
+        let currentDate = Date()
+        var addDays = DateComponents()
+        addDays.day = dhms.d
+
+        guard let countdownDueDate = Calendar.current.date(byAdding: addDays, to: currentDate) else {
+            return nil
+        }
+        
+        let dateComponents = Calendar.current.dateComponents([.year, .month, .day], from: countdownDueDate)
         let (year, intMonth, intDay) = (dateComponents.year, dateComponents.month, dateComponents.day)
         
         guard let year, let intMonth, let intDay else { return nil }
         
         let month = String(format: "%02d", intMonth)
-        let day = String(format: "%02d", intDay + dhms.d)
+        let day = String(format: "%02d", intDay)
         let time = String(format: "%02d:%02d:%02d", dhms.h, dhms.m, dhms.s)
         let fullDateString = "\(year)-\(month)-\(day)T\(time)"
                 
