@@ -10,12 +10,12 @@ import SwiftUI
 extension View {
     // Countdown Views
     func tiny(_ cds: [Countdown]) -> some View {
-        HStack {
+        let width = K.FrameSizes.AllPlatforms.tinyCountdownWidth
+        return LazyVGrid(columns: [GridItem(.adaptive(minimum: width, maximum: width))], alignment: .leading) {
             ForEach(cds) { countdown in
                 Tiny(countdown)
             }
         }
-        .frame(maxWidth: 600, alignment: .topLeading)
     }
     
     func small(_ cds: [Countdown]) -> some View {

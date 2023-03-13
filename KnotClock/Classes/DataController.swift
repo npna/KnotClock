@@ -42,6 +42,10 @@ extension Single {
     }
     
     var deadlineDate: Date? {
-        Countdown.convertTimeAsSecondsToDate(self.remainingSecondsToDeadline)
+        if self.remainingSecondsToDeadline < 0 {
+            return nil
+        }
+        
+        return Countdown.convertRemainingSecondsToDate(self.remainingSecondsToDeadline)
     }
 }

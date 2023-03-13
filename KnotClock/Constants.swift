@@ -48,26 +48,32 @@ struct K {
         static let fetchedTomorrowDailies = "FetchedDailyCountdownsForTomorrow"
     }
     
-    struct MacWindowSizes {
-        struct Main {
-            static let minWidth: CGFloat = 600
-            static let minHeight: CGFloat = 400
+    struct FrameSizes {
+        struct AllPlatforms {
+            static let tinyCountdownWidth: CGFloat = 114
         }
         
-        struct Settings {
-            static let minWidth: CGFloat = 550
-            static let minHeight: CGFloat = 600
+        struct Mac {
+            struct Main {
+                static let minWidth: CGFloat = 640
+                static let minHeight: CGFloat = 400
+            }
+            
+            struct Settings {
+                static let minWidth: CGFloat = 550
+                static let minHeight: CGFloat = 600
+            }
+            
+            struct Overview {
+                static let maxWidth: CGFloat = 600
+            }
+            
+            struct Menubar {
+                static let minWidth: CGFloat = 400
+            }
+            
+            static let countdownVStackWidthSubtract: CGFloat = 30
         }
-        
-        struct Overview {
-            static let maxWidth: CGFloat = 600
-        }
-        
-        struct Menubar {
-            static let minWidth: CGFloat = 400
-        }
-        
-        static let countdownVStackWidthSubtract: CGFloat = 30
     }
     
     struct Assets {

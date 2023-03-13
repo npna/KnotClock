@@ -98,7 +98,12 @@ struct Countdown: Identifiable, Equatable {
         return (d, h, m, s)
     }
     
-    static func convertTimeAsSecondsToDate(_ seconds: Int) -> Date? {
+    static func convertTimeAsSecondsToTimeAsTodayDate(_ timeAsSeconds: Int) -> Date? {
+        let startingDate = Calendar.current.startOfDay(for: Date())
+        return convertRemainingSecondsToDate(timeAsSeconds, startingDate: startingDate)
+    }
+    
+    static func convertRemainingSecondsToDate(_ seconds: Int, startingDate: Date = Date()) -> Date? {
         let dhms = secondsToDHMS(seconds)
         
         var addTimeComponents = DateComponents()
@@ -107,7 +112,7 @@ struct Countdown: Identifiable, Equatable {
         addTimeComponents.hour = dhms.h
         addTimeComponents.day = dhms.d
         
-        return Calendar.current.date(byAdding: addTimeComponents, to: Date())
+        return Calendar.current.date(byAdding: addTimeComponents, to: startingDate)
     }
     
     static func ==(lhs: Countdown, rhs: Countdown) -> Bool {

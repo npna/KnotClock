@@ -13,6 +13,7 @@ struct Tiny: View {
     @State private var timer: Timer? = nil
     @State private var countdown: Countdown
     private let remainingTime: RemainingTimeDetails
+    private let width = K.FrameSizes.AllPlatforms.tinyCountdownWidth
     
     init(_ countdown: Countdown) {
         _countdown = State(initialValue: countdown)
@@ -29,15 +30,20 @@ struct Tiny: View {
             }
             Text(text).font(.footnote)
                 .onHover { hovering in
-                    if hovering {
-                        showingPopover = true
-                    } else {
-                        showingPopover = false
+                    if remainingTime.inSeconds < 0 {
+                        showingPopover = hovering
                     }
                 }
+            Spacer()
+        }
+        .onHover { hovering in
+            if remainingTime.inSeconds > 0 {
+                showingPopover = hovering
+            }
         }
         .padding(.all, 5)
         .lineLimit(1)
+        .frame(width: width)
         .background(.quaternary)
         .cornerRadius(5)
         #if os(macOS)

@@ -32,17 +32,17 @@ struct KnotClockApp: App {
         #if os(macOS)
         Window(K.appName, id: K.appName) {
             mainView()
-                .frame(minWidth: K.MacWindowSizes.Main.minWidth, maxWidth: .infinity, minHeight: K.MacWindowSizes.Main.minHeight, maxHeight: .infinity)
-        }.defaultSize(width: K.MacWindowSizes.Main.minWidth, height: K.MacWindowSizes.Main.minHeight)
+                .frame(minWidth: K.FrameSizes.Mac.Main.minWidth, maxWidth: .infinity, minHeight: K.FrameSizes.Mac.Main.minHeight, maxHeight: .infinity)
+        }.defaultSize(width: K.FrameSizes.Mac.Main.minWidth, height: K.FrameSizes.Mac.Main.minHeight)
         
         Settings {
             SettingsView().applyColorScheme()
-                .frame(minWidth: K.MacWindowSizes.Settings.minWidth, maxWidth: .infinity, minHeight: K.MacWindowSizes.Settings.minHeight, maxHeight: .infinity)
-        }.defaultSize(width: K.MacWindowSizes.Settings.minWidth, height: K.MacWindowSizes.Settings.minHeight)
+                .frame(minWidth: K.FrameSizes.Mac.Settings.minWidth, maxWidth: .infinity, minHeight: K.FrameSizes.Mac.Settings.minHeight, maxHeight: .infinity)
+        }.defaultSize(width: K.FrameSizes.Mac.Settings.minWidth, height: K.FrameSizes.Mac.Settings.minHeight)
         
         MenuBarExtra(isInserted: $preferences.x.showMenubarExtra) {
             mainView(isInMenubar: true)
-                .frame(minWidth: K.MacWindowSizes.Menubar.minWidth)
+                .frame(minWidth: K.FrameSizes.Mac.Menubar.minWidth)
         } label: {
             macMenubar.menubarIcon()
         }

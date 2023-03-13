@@ -65,7 +65,7 @@ struct OverviewCountdowns: View {
                 }
             }
         }
-        .frame(maxWidth: K.MacWindowSizes.Overview.maxWidth)
+        .frame(maxWidth: K.FrameSizes.Mac.Overview.maxWidth)
         .padding()
     }
     
@@ -87,7 +87,7 @@ struct OverviewCountdowns: View {
             
             Spacer()
         }
-        .frame(maxWidth: K.MacWindowSizes.Overview.maxWidth, alignment: .topLeading)
+        .frame(maxWidth: K.FrameSizes.Mac.Overview.maxWidth, alignment: .topLeading)
         .padding()
     }
 }
