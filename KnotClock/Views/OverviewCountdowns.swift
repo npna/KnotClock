@@ -11,8 +11,28 @@ struct OverviewCountdowns: View {
     @EnvironmentObject var countdowns: Countdowns
     @Environment(\.managedObjectContext) var moc
     @Environment(\.dismiss) private var dismiss
+    @State private var selectedTab: String = "Daily"
         
     var body: some View {
+        TabView(selection: $selectedTab) {
+            overviewDailiesTab
+                .tabItem {
+                    Label("Daily Countdowns", systemImage: "list.dash")
+                }
+                .tag("Daily")
+            
+            overviewSinglesTab
+                .tabItem {
+                    Label("Single Countdowns", systemImage: "square.and.pencil")
+                }
+                .tag("Single")
+        }
+        .macOSPadding(.top)
+        
+        Button("Close", action: dismiss.callAsFunction).padding(.bottom)
+    }
+    
+    var overviewDailiesTab: some View {
         VStack(alignment: .leading) {
             Text("Weekly overview of daily countdowns:").bold().padding(.bottom)
             
@@ -44,28 +64,31 @@ struct OverviewCountdowns: View {
                     }
                 }
             }
+        }
+        .frame(maxWidth: K.MacWindowSizes.Overview.maxWidth)
+        .padding()
+    }
+    
+    var overviewSinglesTab: some View {
+        VStack(alignment: .leading) {
+            Text("Overview your single countdowns:").bold().padding(.bottom)
             
-            Text("Single countdowns:").bold().padding(.top)
+            let singles = countdowns.getSingles(fetchLimit: 500, excludeExpired: true, limitByMaxEpoch: false)
             
-            ScrollView(.horizontal) {
-                let singles = countdowns.getSingles(fetchLimit: 10, excludeExpired: true, limitByMaxEpoch: false)
-
-                HStack {
-                    if singles.count > 0 {
-                        ForEach(singles) { single in
-                            OverviewSingleCountdownWithAction(singleCountdown: single)
-                        }
-                    } else {
-                        Text("None!")
+            if singles.count == 0 {
+                Text("None!")
+            } else {
+                ScrollView(.vertical) {
+                    ForEach(singles) { single in
+                        OverviewSingleCountdownWithAction(singleCountdown: single)
                     }
                 }
-                .padding(.bottom)
             }
+            
+            Spacer()
         }
-        .frame(maxWidth: 600)
+        .frame(maxWidth: K.MacWindowSizes.Overview.maxWidth, alignment: .topLeading)
         .padding()
-        
-        Button("Close", action: dismiss.callAsFunction).padding(.bottom)
     }
 }
 

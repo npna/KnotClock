@@ -34,3 +34,14 @@ extension Daily {
         }
     }
 }
+
+extension Single {
+    var remainingSecondsToDeadline: Int {
+        let now = Date().timeIntervalSince1970
+        return Int(self.deadlineEpoch) - Int(now)
+    }
+    
+    var deadlineDate: Date? {
+        Countdown.convertTimeAsSecondsToDate(self.remainingSecondsToDeadline)
+    }
+}
