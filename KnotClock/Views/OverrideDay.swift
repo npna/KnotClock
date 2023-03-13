@@ -45,6 +45,7 @@ struct OverrideDay: View {
     
     func override(to day: String) {
         countdowns.overrideToday(as: day)
+        Countdowns.shared.clearAndRefetch()
         dismiss()
     }
     

@@ -10,7 +10,7 @@ import Combine
 
 struct MainView: View {
     @Environment(\.managedObjectContext) var moc
-    @StateObject private var countdowns = Countdowns.shared
+    @EnvironmentObject private var countdowns: Countdowns
     @State private var showAddCountdown = false
     @State private var showWeeklyOverviewSheet = false
     @State private var showOverrideDaySheet = false

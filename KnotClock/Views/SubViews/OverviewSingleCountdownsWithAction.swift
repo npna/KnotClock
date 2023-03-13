@@ -12,7 +12,7 @@ struct OverviewSingleCountdownWithAction: View {
     @State private var showingDeleteConfirmation = false
     @State private var showingEditPopover = false
     
-    let singleCountdown: Single
+    private let singleCountdown: Single
     private var validTime: Bool = true
     
     @State private var title: String
@@ -56,7 +56,7 @@ struct OverviewSingleCountdownWithAction: View {
                 showingDeleteConfirmation = true
             }
         }
-        .frame(maxWidth: K.MacWindowSizes.Overview.maxWidth)
+        .frame(maxWidth: K.FrameSizes.Mac.Overview.maxWidth)
         .padding()
         .background(.quaternary)
         .cornerRadius(5)
@@ -89,6 +89,7 @@ struct OverviewSingleCountdownWithAction: View {
         let deadlineEpoch = Int64((deadlineDate.omittingSecondsToZero ?? deadlineDate).timeIntervalSince1970)
         singleCountdown.setValue(deadlineEpoch, forKey: "deadlineEpoch")
         showingEditPopover = false
+        
         saveMOC()
     }
     
@@ -97,9 +98,10 @@ struct OverviewSingleCountdownWithAction: View {
         saveMOC()
     }
     
-    func saveMOC() {
+    func saveMOC(didEdit: Bool = true) {
         do {
             try moc.save()
+            Countdowns.shared.clearAndRefetch()
         } catch {
             Countdowns.shared.alertMessage = error.localizedDescription
             Countdowns.shared.showAlert = true

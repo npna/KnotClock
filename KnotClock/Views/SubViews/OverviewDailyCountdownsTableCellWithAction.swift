@@ -25,8 +25,8 @@ struct OverviewDailyCountdownTableCellWithAction: View {
         self.weekday = weekday
         
         _title = State(initialValue: dailyCountdown.title ?? "")
-        if let timeAsSecondsToDate = Countdown.convertTimeAsSecondsToDate(Int(dailyCountdown.time)) {
-            _dailyTime = State(initialValue: timeAsSecondsToDate)
+        if let timeAsDate = Countdown.convertTimeAsSecondsToTimeAsTodayDate(Int(dailyCountdown.time)) {
+            _dailyTime = State(initialValue: timeAsDate)
         } else {
             #if DEBUG
             print("Invalid dailyTime!")
@@ -142,6 +142,7 @@ struct OverviewDailyCountdownTableCellWithAction: View {
     func saveMOC() {
         do {
             try moc.save()
+            Countdowns.shared.clearAndRefetch()
         } catch {
             Countdowns.shared.alertMessage = error.localizedDescription
             Countdowns.shared.showAlert = true

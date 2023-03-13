@@ -15,6 +15,7 @@ class Countdowns: ObservableObject {
     @Published private(set) var current: [Countdown] = []
     @Published private(set) var upcomming: [Countdown] = []
     @Published private(set) var expired: [Countdown] = []
+    @Published private(set) var fullList: [Countdown] = []
     
     @Published var alertMessage = ""
     @Published var showAlert = false
@@ -26,10 +27,8 @@ class Countdowns: ObservableObject {
     @AppStorage(K.StorageKeys.hiddenDailies) private var hiddenDailies = HideDaily(list: [HiddenDailyItem()])
     @AppStorage(K.StorageKeys.fetchedTomorrowDailies) private var fetchedTomorrowDailies: Bool = false
     
-    private var fullList: [Countdown] = []
     private var timer: Timer? = nil
     private var oldTimerInterval: Double? = nil
-    
     private var lastRefetchDay: Int = 0
     
     init() {
@@ -250,6 +249,17 @@ class Countdowns: ObservableObject {
         #if DEBUG
         print("Refetched All")
         #endif
+    }
+    
+    // TODO: Implement a better approach
+    // without this MainView won't update after editing Single/Daily countdowns
+    func clearAndRefetch(delay: TimeInterval = 0.5) {
+        fullList.removeAll()
+        updateViewTimes(dontRefetch: true)
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+            self.refetchAllAndHandleNotifications()
+        }
     }
     
     func refetchAllAndHandleNotifications() {
