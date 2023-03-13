@@ -14,8 +14,6 @@ struct OverviewDailyCountdownTableCellWithAction: View {
     @Environment(\.managedObjectContext) var moc
     @State private var showingDeleteConfirmation = false
     @State private var showingEditPopover = false
-    @State private var showingAlert = false
-    @State private var alertMessage = ""
     
     @State private var title: String
     @State private var dailyTime: Date
@@ -55,11 +53,11 @@ struct OverviewDailyCountdownTableCellWithAction: View {
             HStack {
                 Text(dailyCountdown.title ?? "").bold().frame(maxWidth: 190).fixedSize(horizontal: true, vertical: false)
                 
-                actionButton("pencil.circle.fill", .blue) {
+                actionIconButton("pencil.circle.fill", .blue) {
                     showingEditPopover = true
                 }
                 
-                actionButton("x.circle.fill") {
+                actionIconButton("x.circle.fill") {
                     showingDeleteConfirmation = true
                 }
             }
@@ -99,9 +97,6 @@ struct OverviewDailyCountdownTableCellWithAction: View {
             }
             
             Text(String(format: "%02d:%02d", dhms.h, dhms.m)).font(.footnote)
-        }
-        .alert(alertMessage, isPresented: $showingAlert) {
-            Button("OK"){}
         }
         .frame(maxWidth: 240, alignment: .leading)
         .padding(.horizontal)
@@ -148,8 +143,8 @@ struct OverviewDailyCountdownTableCellWithAction: View {
         do {
             try moc.save()
         } catch {
-            alertMessage = error.localizedDescription
-            showingAlert = true
+            Countdowns.shared.alertMessage = error.localizedDescription
+            Countdowns.shared.showAlert = true
         }
     }
 }

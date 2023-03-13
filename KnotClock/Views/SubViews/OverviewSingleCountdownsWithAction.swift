@@ -10,10 +10,35 @@ import SwiftUI
 struct OverviewSingleCountdownWithAction: View {
     @Environment(\.managedObjectContext) var moc
     @State private var showingDeleteConfirmation = false
+    @State private var showingEditPopover = false
     
     let singleCountdown: Single
+    private var validTime: Bool = true
+    
+    @State private var title: String
+    @State private var deadlineDate: Date
+    
+    init(singleCountdown: Single) {
+        self.singleCountdown = singleCountdown
+        _title = State(initialValue: singleCountdown.title ?? "")
+        if let convertDeadlineToDate = singleCountdown.deadlineDate {
+            _deadlineDate = State(initialValue: convertDeadlineToDate)
+        } else {
+            _deadlineDate = State(initialValue: Date())
+            validTime = false
+        }
+    }
     
     var body: some View {
+        if validTime {
+            bodyContent
+        } else {
+            Text("Something went wrong...").font(.footnote).foregroundColor(.red)
+        }
+    }
+    
+    @ViewBuilder
+    var bodyContent: some View {
         HStack {
             Text(singleCountdown.title ?? "").bold()
             
@@ -23,7 +48,11 @@ struct OverviewSingleCountdownWithAction: View {
             
             Spacer()
             
-            actionButton("x.circle.fill") {
+            actionIconButton("pencil.circle.fill", .blue) {
+                showingEditPopover = true
+            }
+            
+            actionIconButton("x.circle.fill") {
                 showingDeleteConfirmation = true
             }
         }
@@ -37,15 +66,30 @@ struct OverviewSingleCountdownWithAction: View {
                 showingDeleteConfirmation = false
             }
         }
+        .popover(isPresented: $showingEditPopover) {
+            Text("Edit this countdown:").bold().padding(.horizontal).padding(.top)
+            Form {
+                TextField("Title", text: $title)
+                DatePicker("Time", selection: $deadlineDate)
+                
+                HStack(alignment: .center) {
+                    Button("Save", action: saveEdits)
+                        .buttonStyle(FormButton())
+                    Button("Cancel", role: .cancel) { showingEditPopover = false }
+                        .buttonStyle(FormButton(backgroundColor: .gray))
+                }
+                .padding(.top)
+            }
+            .padding()
+        }
     }
     
-    func getFormattedFullTime() -> String {
-        if let id = singleCountdown.id, let title = singleCountdown.title {
-            let countdown = Countdown(id: id, title: title, category: .single, time: Int(singleCountdown.deadlineEpoch))
-            return countdown.remainingTime.formattedFullTime
-        }
-        
-        return ""
+    func saveEdits() {
+        singleCountdown.setValue(title, forKey: "title")
+        let deadlineEpoch = Int64((deadlineDate.omittingSecondsToZero ?? deadlineDate).timeIntervalSince1970)
+        singleCountdown.setValue(deadlineEpoch, forKey: "deadlineEpoch")
+        showingEditPopover = false
+        saveMOC()
     }
     
     func deleteCompletely() {

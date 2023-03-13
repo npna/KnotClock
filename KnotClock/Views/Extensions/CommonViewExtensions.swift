@@ -79,7 +79,7 @@ extension View {
     }
     
     // Others
-    func actionButton(_ sfsymbol: String, _ color: Color = .red, action: @escaping () -> Void) -> some View {
+    func actionIconButton(_ sfsymbol: String, _ color: Color = .red, action: @escaping () -> Void) -> some View {
         Button {
             action()
         } label: {

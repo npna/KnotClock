@@ -101,29 +101,13 @@ struct Countdown: Identifiable, Equatable {
     static func convertTimeAsSecondsToDate(_ seconds: Int) -> Date? {
         let dhms = secondsToDHMS(seconds)
         
-        let currentDate = Date()
-        var addDays = DateComponents()
-        addDays.day = dhms.d
-
-        guard let countdownDueDate = Calendar.current.date(byAdding: addDays, to: currentDate) else {
-            return nil
-        }
+        var addTimeComponents = DateComponents()
+        addTimeComponents.second = dhms.s
+        addTimeComponents.minute = dhms.m
+        addTimeComponents.hour = dhms.h
+        addTimeComponents.day = dhms.d
         
-        let dateComponents = Calendar.current.dateComponents([.year, .month, .day], from: countdownDueDate)
-        let (year, intMonth, intDay) = (dateComponents.year, dateComponents.month, dateComponents.day)
-        
-        guard let year, let intMonth, let intDay else { return nil }
-        
-        let month = String(format: "%02d", intMonth)
-        let day = String(format: "%02d", intDay)
-        let time = String(format: "%02d:%02d:%02d", dhms.h, dhms.m, dhms.s)
-        let fullDateString = "\(year)-\(month)-\(day)T\(time)"
-                
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
-        dateFormatter.timeZone = TimeZone.current
-        dateFormatter.locale = Locale.current
-        return dateFormatter.date(from: fullDateString)
+        return Calendar.current.date(byAdding: addTimeComponents, to: Date())
     }
     
     static func ==(lhs: Countdown, rhs: Countdown) -> Bool {
