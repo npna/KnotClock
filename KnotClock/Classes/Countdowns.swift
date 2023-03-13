@@ -30,7 +30,7 @@ class Countdowns: ObservableObject {
     private var timer: Timer? = nil
     private var oldTimerInterval: Double? = nil
     
-    private var lastReFetchDay: Int = 0
+    private var lastRefetchDay: Int = 0
     
     init() {
         rescheduleTimer(interval: preferences.x.refreshTimerInterval)
@@ -50,18 +50,8 @@ class Countdowns: ObservableObject {
     }
     
     func updateViewTimes(dontRefetch: Bool = false) {
-        if !dontRefetch {
-            if lastReFetchDay != todayYMD() {
-                refetchAll()
-                #if DEBUG
-                print("Day has changed, refetched data.")
-                #endif
-            } else if shouldIncludeTomorrowDailies(inRangeOfRefreshTimerInterval: true) {
-                refetchAll()
-                #if DEBUG
-                print("Time to include tomorrow's daily countdowns.")
-                #endif
-            }
+        if updateViewShouldRefetch(dontRefetch) {
+            refetchAll()
         }
         
         expired.removeAll()
@@ -119,6 +109,17 @@ class Countdowns: ObservableObject {
                 upcomming.append(item)
             }
         }
+    }
+    
+    func updateViewShouldRefetch(_ dontRefetch: Bool) -> Bool {
+        #if DEBUG
+        if lastRefetchDay != todayYMD() {
+            print("Day has changed, refetched data.")
+        } else {
+            print("Time to include tomorrow's daily countdowns.")
+        }
+        #endif
+        return dontRefetch == false && (lastRefetchDay != todayYMD() || shouldIncludeTomorrowDailies(inRangeOfRefreshTimerInterval: true))
     }
     
     func resetNotifications() {
@@ -241,7 +242,7 @@ class Countdowns: ObservableObject {
             return lhs.remainingSeconds < rhs.remainingSeconds
         }
         
-        lastReFetchDay = todayYMD()
+        lastRefetchDay = todayYMD()
         
         updateViewTimes(dontRefetch: true)
         

@@ -12,23 +12,6 @@ typealias RemainingTimeDetails = (d: String, h: String, m: String, s: String, in
 struct K {
     static let appName = "KnotClock"
     
-    struct StorageKeys {
-        static let userPreferences = "userPreferences" // Default Settings are in Preferences.swift file
-        static let hiddenDailies = "HiddenDailyCountdowns"
-        static let fetchedTomorrowDailies = "FetchedDailyCountdownsForTomorrow"
-    }
-    
-    static let weekdays = ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"]
-    static let weekdaysForSelection: [(name: String, isSelected: Bool)] = [
-        ("Monday", false),
-        ("Tuesday", false),
-        ("Wednesday", false),
-        ("Thursday", false),
-        ("Friday", false),
-        ("Saturday", false),
-        ("Sunday", false)
-    ]
-    
     static let refreshThresholdHideSeconds: TimeInterval = 20
     static let timerAccuracyOptions: [(title: String, time: TimeInterval)] = [
         ("Lowest", 60),
@@ -49,6 +32,23 @@ struct K {
     
     static let minUpExSliderValue: Double = 1 // is Double to work with slider
     static let maxUpExSliderValue: Double = 10
+    
+    static let weekdays = ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"]
+    static let weekdaysForSelection: [(name: String, isSelected: Bool)] = [
+        ("Monday", false),
+        ("Tuesday", false),
+        ("Wednesday", false),
+        ("Thursday", false),
+        ("Friday", false),
+        ("Saturday", false),
+        ("Sunday", false)
+    ]
+    
+    struct StorageKeys {
+        static let userPreferences = "userPreferences" // Default Settings are in Preferences.swift file
+        static let hiddenDailies = "HiddenDailyCountdowns"
+        static let fetchedTomorrowDailies = "FetchedDailyCountdownsForTomorrow"
+    }
     
     struct MacWindowSizes {
         struct Main {

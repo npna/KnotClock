@@ -30,22 +30,20 @@ struct AddCountdownView: View {
     }
     
     var body: some View {
-        ZStack {
-            TabView(selection: $selectedTab) {
-                daily
-                    .tabItem {
-                        Label("Daily", systemImage: "list.dash")
-                    }
-                    .tag("Daily")
-                
-                single
-                    .tabItem {
-                        Label("Single", systemImage: "square.and.pencil")
-                    }
-                    .tag("Single")
-            }
-            .macOSPadding(.top)
+        TabView(selection: $selectedTab) {
+            daily
+                .tabItem {
+                    Label("Daily", systemImage: "list.dash")
+                }
+                .tag("Daily")
+            
+            single
+                .tabItem {
+                    Label("Single", systemImage: "square.and.pencil")
+                }
+                .tag("Single")
         }
+        .macOSPadding(.top)
         .alert(alertMessage, isPresented: $alertIsPresented) {
             Button("OK"){}
         }
