@@ -21,7 +21,7 @@ struct Preferences<DefaultUserPreferences: Codable> {
             
             x = decoded
             
-            Countdowns.shared.refetchAllAndHandleNotifications()
+            Countdowns.shared.clearAndRefetch()
         }
     }
 }
@@ -34,7 +34,6 @@ struct DefaultUserPreferences: Codable {
     var menubarIconColoredSymbolName = "timer"
     var showMenubarExtra = true
     var showDockIcon = true
-    var overrideDay = "none"
     
     var preferredTheme: Theme = .system
     

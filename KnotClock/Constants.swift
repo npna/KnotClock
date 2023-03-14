@@ -44,8 +44,9 @@ struct K {
     
     struct StorageKeys {
         static let userPreferences = "userPreferences" // Default Settings are in Preferences.swift file
-        static let hiddenDailies = "HiddenDailyCountdowns"
-        static let fetchedTomorrowDailies = "FetchedDailyCountdownsForTomorrow"
+        static let hiddenDailies = "hiddenDailyCountdowns"
+        static let fetchedTomorrowDailies = "fetchedDailyCountdownsForTomorrow"
+        static let overrideDay = "overrideDay"
     }
     
     struct FrameSizes {

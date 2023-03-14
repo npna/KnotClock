@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct CountdownsSettingsView: View {
-    @AppStorage(K.StorageKeys.userPreferences) var preferences = Preferences(x: DefaultUserPreferences())
+    @AppStorage(K.StorageKeys.userPreferences) private var preferences = Preferences(x: DefaultUserPreferences())
     
     var body: some View {
         scrollViewOnMac {

@@ -11,7 +11,7 @@ import ServiceManagement
 #endif
 
 struct ApplicationSettingsView: View {
-    @AppStorage(K.StorageKeys.userPreferences) var preferences = Preferences(x: DefaultUserPreferences())
+    @AppStorage(K.StorageKeys.userPreferences) private var preferences = Preferences(x: DefaultUserPreferences())
 
     @State private var showResetSettingsConfirmation = false
     @State private var showAlert = false
