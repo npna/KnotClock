@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct FullSize: View {
-    @AppStorage(K.StorageKeys.userPreferences) var preferences = Preferences(x: DefaultUserPreferences())
+    @AppStorage(K.StorageKeys.userPreferences) private var preferences = Preferences(x: DefaultUserPreferences())
     
     @Environment(\.colorScheme) var colorScheme
     @State private var countdown: Countdown
@@ -73,6 +73,7 @@ struct FullSize: View {
             checkIsShowing()
         }
         .frame(minWidth: isInMenubar ? K.FrameSizes.Mac.Menubar.minWidth - K.FrameSizes.Mac.countdownVStackWidthSubtract : .none)
+        .contextualMenu(for: $countdown)
     }
     
     func checkIsShowing() {

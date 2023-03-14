@@ -46,6 +46,7 @@ struct Tiny: View {
         .frame(width: width)
         .background(.quaternary)
         .cornerRadius(5)
+        .contextualMenu(for: $countdown)
         #if os(macOS)
         .popover(isPresented: $showingPopover) {
             VStack {

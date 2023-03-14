@@ -15,6 +15,7 @@ class Countdowns: ObservableObject {
     @Published private(set) var current: [Countdown] = []
     @Published private(set) var upcomming: [Countdown] = []
     @Published private(set) var expired: [Countdown] = []
+    @Published private(set) var hidden: [Countdown] = []
     @Published private(set) var fullList: [Countdown] = []
     
     @Published var alertMessage = ""
@@ -24,6 +25,7 @@ class Countdowns: ObservableObject {
     @Published private(set) var notificationsTotalCount = 0
     
     @AppStorage(K.StorageKeys.userPreferences) private var preferences = Preferences(x: DefaultUserPreferences())
+    @AppStorage(K.StorageKeys.overrideDay) private var overrideDay = ""
     @AppStorage(K.StorageKeys.hiddenDailies) private var hiddenDailies = HideDaily(list: [HiddenDailyItem()])
     @AppStorage(K.StorageKeys.fetchedTomorrowDailies) private var fetchedTomorrowDailies: Bool = false
     
@@ -56,6 +58,7 @@ class Countdowns: ObservableObject {
         expired.removeAll()
         current.removeAll()
         upcomming.removeAll()
+        hidden.removeAll()
         var lowestRemainingSeconds: Int? = nil
         
         let upMax = Int(preferences.x.maxUpcomming)
@@ -88,6 +91,9 @@ class Countdowns: ObservableObject {
                 
                 countEx += 1
                 expired.append(item)
+            }
+            else if item.category == .daily && isDailyHidden(item.id) {
+                hidden.append(Countdown(id: item.id, title: item.title, category: .daily, time: item.time, isHidden: true))
             }
             else if lowestRemainingSeconds == nil
             {
@@ -407,13 +413,13 @@ class Countdowns: ObservableObject {
         dateFormatter.dateFormat = K.dateFormat
         
         let dateString = dateFormatter.string(from: Date())
-        preferences.x.overrideDay = "\(dateString)=\(weekday.lowercased())"
+        overrideDay = "\(dateString)=\(weekday.lowercased())"
         
-        refetchAllAndHandleNotifications()
+        clearAndRefetch()
     }
     
     func todayIsOverriddenAs() -> String? {
-        let separated = preferences.x.overrideDay.components(separatedBy: "=")
+        let separated = overrideDay.components(separatedBy: "=")
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = K.dateFormat
@@ -450,6 +456,11 @@ class Countdowns: ObservableObject {
             clearOldHiddenDaily()
         }
         hiddenDailies.list.append(HiddenDailyItem(id: id, ymd: todayYMD()))
+        refetchAll()
+    }
+    
+    func unhideDaily(_ id: UUID) {
+        hiddenDailies.list.removeAll(where: { $0.id == id })
         refetchAll()
     }
     

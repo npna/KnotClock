@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct Small: View {
-    @AppStorage(K.StorageKeys.userPreferences) var preferences = Preferences(x: DefaultUserPreferences())
+    @AppStorage(K.StorageKeys.userPreferences) private var preferences = Preferences(x: DefaultUserPreferences())
     @State private var countdown: Countdown
     @Environment(\.colorScheme) var colorScheme
     private let remainingTime: RemainingTimeDetails
@@ -35,6 +35,13 @@ struct Small: View {
             
             if countdown.remainingSeconds >= 0 {
                 timeView(remainingTime, .small, preferences)
+                if countdown.isHidden {
+                    Button {
+                        Countdowns.shared.unhideDaily(countdown.id)
+                    } label: {
+                        Label("Unhide", systemImage: "eye").labelStyle(.iconOnly)
+                    }
+                }
             } else {
                 Button {
                     countdown.deleteExpiredSingleHideDaily()
@@ -48,6 +55,7 @@ struct Small: View {
         .padding(.vertical, 5)
         .background(getBackgroundColor())
         .cornerRadius(K.FullSizeCountdown.cornerRadius)
+        .contextualMenu(for: $countdown)
     }
     
     func getBackgroundColor() -> Color {

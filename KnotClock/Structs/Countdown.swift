@@ -15,6 +15,7 @@ struct Countdown: Identifiable, Equatable {
     let category: CountdownCategory
     let time: Int
     var isForTomorrow: Bool = false
+    var isHidden: Bool = false
     
     var entityName: String {
         (self.category == .daily) ? "Daily" : "Single"
@@ -120,11 +121,11 @@ struct Countdown: Identifiable, Equatable {
     }
     
     // Core Data
-    func deleteExpiredSingleHideDaily() {
+    func deleteExpiredSingleHideDaily(dontCheckRemainingSeconds: Bool = false) {
         if category == .daily {
             Countdowns.shared.hideDaily(id)
         } else {
-            guard remainingSeconds < 0 else { return }
+            guard remainingSeconds < 0 || dontCheckRemainingSeconds else { return }
             delete()
         }
     }

@@ -14,9 +14,10 @@ struct MainView: View {
     @State private var showAddCountdown = false
     @State private var showWeeklyOverviewSheet = false
     @State private var showOverrideDaySheet = false
+    @State private var showHiddenSheet = false
     private var isInMenubar: Bool
     
-    @AppStorage(K.StorageKeys.userPreferences) var preferences = Preferences(x: DefaultUserPreferences())
+    @AppStorage(K.StorageKeys.userPreferences) private var preferences = Preferences(x: DefaultUserPreferences())
     
     #if os(macOS)
     @Environment(\.openWindow) private var openWindow
@@ -51,6 +52,9 @@ struct MainView: View {
             }
             .sheet(isPresented: $showOverrideDaySheet) {
                 OverrideDay()
+            }
+            .sheet(isPresented: $showHiddenSheet) {
+                HiddenCountdowns()
             }
             .onChange(of: preferences.x.refreshTimerInterval) { newValue in
                 countdowns.rescheduleTimer(interval: newValue)
@@ -213,6 +217,14 @@ struct MainView: View {
                 Image(systemName: "gear")
             }
             #endif
+            
+            if countdowns.hidden.count > 0 {
+                Button {
+                    showHiddenSheet = true
+                } label: {
+                    Image(systemName: "eye.slash")
+                }
+            }
             
             Button {
                 showOverrideDaySheet = true
