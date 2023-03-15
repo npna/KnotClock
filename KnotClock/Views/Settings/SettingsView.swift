@@ -8,8 +8,10 @@
 import SwiftUI
 
 struct SettingsView: View {
+    @AppStorage(K.StorageKeys.enableDebugMode) private var enableDebugMode = false
+    
     private enum Tabs: Hashable {
-        case countdowns, indications, application
+        case countdowns, indications, application, debug
     }
     
     var body: some View {
@@ -29,9 +31,24 @@ struct SettingsView: View {
                     Label("Application", systemImage: "app.badge.checkmark")
                 }
                 .tag(Tabs.application)
+            
+            if enableDebugMode {
+                DebugView()
+                    .tabItem {
+                        Label("Debug", systemImage: "ladybug")
+                    }
+                    .tag(Tabs.debug)
+            }
         }
-        #if os(macOS)
-        .padding(20)
+        .macOSPadding(20)
+        #if os(macOS) || DEBUG
+            .contextMenu {
+                Menu("Advanced Settings") {
+                    Button("\(enableDebugMode ? "Disable" : "Enable") Debug Mode") {
+                        enableDebugMode.toggle()
+                    }
+                }
+            }
         #endif
     }
 }

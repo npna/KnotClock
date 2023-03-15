@@ -46,6 +46,8 @@
 		0DCA4C5729BBABD400F78368 /* Countdowns.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DCA4C3E29BBABD400F78368 /* Countdowns.swift */; };
 		0DCA4C5929BBABE000F78368 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0DCA4C5829BBABE000F78368 /* Colors.xcassets */; };
 		0DE574C129BD3C5A005BDCA4 /* ApplyColorScheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DE574C029BD3C5A005BDCA4 /* ApplyColorScheme.swift */; };
+		0DE7A87C29C254230056A278 /* DebugView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DE7A87B29C254230056A278 /* DebugView.swift */; };
+		0DE7A87E29C25DCA0056A278 /* RunAfterConfirmation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DE7A87D29C25DCA0056A278 /* RunAfterConfirmation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -90,6 +92,8 @@
 		0DCA4C3E29BBABD400F78368 /* Countdowns.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Countdowns.swift; sourceTree = "<group>"; };
 		0DCA4C5829BBABE000F78368 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		0DE574C029BD3C5A005BDCA4 /* ApplyColorScheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyColorScheme.swift; sourceTree = "<group>"; };
+		0DE7A87B29C254230056A278 /* DebugView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugView.swift; sourceTree = "<group>"; };
+		0DE7A87D29C25DCA0056A278 /* RunAfterConfirmation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunAfterConfirmation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -179,6 +183,7 @@
 				0DCA4C2429BBABD400F78368 /* ApplicationSettingsView.swift */,
 				0DCA4C2529BBABD400F78368 /* CountdownsSettingsView.swift */,
 				0DCA4C2629BBABD400F78368 /* IndicationsSettingsView.swift */,
+				0DE7A87B29C254230056A278 /* DebugView.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -199,6 +204,7 @@
 			isa = PBXGroup;
 			children = (
 				0DCA4C2F29BBABD400F78368 /* OverviewSingleCountdownsWithAction.swift */,
+				0DE7A87D29C25DCA0056A278 /* RunAfterConfirmation.swift */,
 				0DCA4C3029BBABD400F78368 /* OverviewDailyCountdownsTableCellWithAction.swift */,
 				0DCA4C3129BBABD400F78368 /* CountdownViews */,
 			);
@@ -327,6 +333,7 @@
 				0DCA4C0829BBAB3400F78368 /* KnotClockApp.swift in Sources */,
 				0DCA4C5529BBABD400F78368 /* MacMenubar.swift in Sources */,
 				0DCA4C5129BBABD400F78368 /* CommonViewExtensions.swift in Sources */,
+				0DE7A87C29C254230056A278 /* DebugView.swift in Sources */,
 				0DCA4C4A29BBABD400F78368 /* OverviewCountdowns.swift in Sources */,
 				0DCA4C5729BBABD400F78368 /* Countdowns.swift in Sources */,
 				0DCA4C5429BBABD400F78368 /* DataController.swift in Sources */,
@@ -345,6 +352,7 @@
 				0DCA4C4D29BBABD400F78368 /* OverviewDailyCountdownsTableCellWithAction.swift in Sources */,
 				0DCA4C5629BBABD400F78368 /* AppDelegate.swift in Sources */,
 				0D18A3AB29C21F1F00D075D4 /* Alerts.swift in Sources */,
+				0DE7A87E29C25DCA0056A278 /* RunAfterConfirmation.swift in Sources */,
 				0DCA4C4129BBABD400F78368 /* HideDaily.swift in Sources */,
 				0D13C08229C13F07006AC521 /* Backup.swift in Sources */,
 				0DCA4C4729BBABD400F78368 /* TimeSliced.swift in Sources */,

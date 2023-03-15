@@ -49,6 +49,7 @@ struct K {
         static let hiddenDailies = "hiddenDailyCountdowns"
         static let fetchedTomorrowDailies = "fetchedDailyCountdownsForTomorrow"
         static let overrideDay = "overrideDay"
+        static let enableDebugMode = "enableDebugMode"
     }
     
     struct FrameSizes {
