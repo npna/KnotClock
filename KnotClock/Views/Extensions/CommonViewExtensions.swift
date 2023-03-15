@@ -57,12 +57,19 @@ extension View {
         }
     }
     
-    
     // Conditional OS
     @ViewBuilder
-    func scrollViewOnMac(content: () -> some View) -> some View {
+    func scrollViewOnMac(_ title: String? = nil, content: () -> some View) -> some View {
         #if os(macOS)
         ScrollView {
+            if let title {
+                HStack {
+                    Text(title).bold()
+                    Spacer()
+                }
+                .padding(.bottom)
+            }
+            
             content()
         }
         #else
