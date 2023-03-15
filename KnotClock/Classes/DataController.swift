@@ -11,14 +11,22 @@ import CoreData
 class DataController: ObservableObject {
     static let shared = DataController()
     static let context = DataController.shared.container.viewContext
-    let container = NSPersistentContainer(name: "KnotClock")
+    let container = NSPersistentContainer(name: K.appName)
     
     init() {
+        load()
+    }
+    
+    func load() {
         container.loadPersistentStores { description, error in
             if let error {
                 fatalError("Error when loading CoreData: \(error.localizedDescription)")
             }
         }
+    }
+    
+    func reload() {
+        load()
     }
 }
 
