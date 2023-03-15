@@ -3,7 +3,7 @@
 </p>
 
 <h1 align="center">KnotClock</h1>
-<p align="center">A very customizable Countdown app for macOS and iOS that can do Daily, Weekly and Single countdowns.</p>
+<p align="center">A very customizable repeating and single-time Countdowns / Reminders app for macOS and iOS that can do Daily, Weekly and Single countdowns.</p>
 
 ---
 
