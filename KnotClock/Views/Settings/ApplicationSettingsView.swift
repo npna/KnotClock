@@ -107,6 +107,27 @@ struct ApplicationSettingsView: View {
                 }
                 .pickerStyle(.segmented)
                 
+                #if os(macOS)
+                macOSDevider()
+                Section {
+                    HStack {
+                        Button {
+                            Countdowns.shared.backup()
+                        } label: {
+                            Label("Backup Countdowns", systemImage: "square.and.arrow.down.fill")
+                        }
+                        
+                        Button {
+                            Countdowns.shared.restoreBackup()
+                        } label: {
+                            Label("Restore", systemImage: "square.and.arrow.up.fill")
+                        }
+                        .disabled(!K.enableBackupRestoreOnMacOS)
+                        .help(K.enableBackupRestoreOnMacOS ? "" : "This option needs to be enabled from source code (it isn't by default because it needed file read permissions)")
+                    }
+                }
+                #endif
+                
                 Button("Reset All Settings") {
                     showResetSettingsConfirmation = true
                 }

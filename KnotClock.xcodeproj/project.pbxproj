@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0D13C08229C13F07006AC521 /* BackupRestore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D13C08129C13F07006AC521 /* BackupRestore.swift */; };
 		0D803C0229C0B62100C7F4BE /* ContextualMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D803C0129C0B62100C7F4BE /* ContextualMenu.swift */; };
 		0D803C0429C0B7BA00C7F4BE /* HiddenCountdowns.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D803C0329C0B7BA00C7F4BE /* HiddenCountdowns.swift */; };
 		0DA02AE529BD1DC200CEBB8F /* ConditionalModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DA02AE429BD1DC200CEBB8F /* ConditionalModifier.swift */; };
@@ -45,6 +46,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0D13C08129C13F07006AC521 /* BackupRestore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupRestore.swift; sourceTree = "<group>"; };
 		0D803C0129C0B62100C7F4BE /* ContextualMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContextualMenu.swift; sourceTree = "<group>"; };
 		0D803C0329C0B7BA00C7F4BE /* HiddenCountdowns.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HiddenCountdowns.swift; sourceTree = "<group>"; };
 		0DA02AE429BD1DC200CEBB8F /* ConditionalModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConditionalModifier.swift; sourceTree = "<group>"; };
@@ -95,6 +97,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0D13C08029C13EF6006AC521 /* Countdowns */ = {
+			isa = PBXGroup;
+			children = (
+				0DCA4C3E29BBABD400F78368 /* Countdowns.swift */,
+				0D13C08129C13F07006AC521 /* BackupRestore.swift */,
+			);
+			path = Countdowns;
+			sourceTree = "<group>";
+		};
 		0DCA4BFB29BBAB3400F78368 = {
 			isa = PBXGroup;
 			children = (
@@ -226,10 +237,10 @@
 		0DCA4C3A29BBABD400F78368 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				0D13C08029C13EF6006AC521 /* Countdowns */,
 				0DCA4C3B29BBABD400F78368 /* DataController.swift */,
 				0DCA4C3C29BBABD400F78368 /* MacMenubar.swift */,
 				0DCA4C3D29BBABD400F78368 /* AppDelegate.swift */,
-				0DCA4C3E29BBABD400F78368 /* Countdowns.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -332,6 +343,7 @@
 				0DCA4C4D29BBABD400F78368 /* OverviewDailyCountdownsTableCellWithAction.swift in Sources */,
 				0DCA4C5629BBABD400F78368 /* AppDelegate.swift in Sources */,
 				0DCA4C4129BBABD400F78368 /* HideDaily.swift in Sources */,
+				0D13C08229C13F07006AC521 /* BackupRestore.swift in Sources */,
 				0DCA4C4729BBABD400F78368 /* TimeSliced.swift in Sources */,
 				0DCA4C4F29BBABD400F78368 /* Tiny.swift in Sources */,
 				0DCA4C4B29BBABD400F78368 /* FocusModeView.swift in Sources */,
@@ -459,7 +471,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = KnotClock/KnotClock.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_ASSET_PATHS = "\"KnotClock/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -496,7 +508,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = KnotClock/KnotClock.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_ASSET_PATHS = "\"KnotClock/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
