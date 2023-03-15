@@ -9,7 +9,8 @@ import SwiftUI
 import UserNotifications
 
 struct IndicationsSettingsView: View {
-    @StateObject private var countdowns = Countdowns.shared
+    @ObservedObject private var countdowns = Countdowns.shared
+    @ObservedObject private var notifications = Notifications.shared
     @AppStorage(K.StorageKeys.userPreferences) private var preferences = Preferences(x: DefaultUserPreferences())
     
     @State private var alertMessage = ""
@@ -97,11 +98,11 @@ struct IndicationsSettingsView: View {
                     notificationToggle(for: $preferences.x.notificationOnCountdownHitsZero)
                 }
                 
-                if preferences.x.notificationCenterAuthorized {
+                if preferences.x.notificationCenterAuthorized && K.notificationsLimit > 0 && notifications.totalCount > (K.notificationsLimit / 2)  {
                     Group {
                         Text("Please note there is a limit of 64 for total notifications,")
                         Text("so adjust settings accordingly to avoid reaching that limit.")
-                        Text("Total notification for today: \(countdowns.notificationsTotalCount)").bold().padding(.vertical)
+                        Text("Total notification for today: \(notifications.totalCount)").bold().padding(.vertical)
                     }
                     .font(.footnote)
                 }

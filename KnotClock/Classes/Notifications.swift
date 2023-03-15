@@ -13,14 +13,14 @@ class Notifications: ObservableObject {
     
     private init() {}
     
+    @Published private(set) var totalCount = 0
     @AppStorage(K.StorageKeys.userPreferences) private var preferences = Preferences(x: DefaultUserPreferences())
-    @Published private(set) var notificationsTotalCount = 0
     
     func reset(fullList: [Countdown]) {
         guard preferences.x.notificationCenterAuthorized == true else { return }
         
         UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
-        notificationsTotalCount = 0
+        totalCount = 0
         
         if countForCurrentSettings(fullList: fullList, withAlert: true) >= K.notificationsLimit {
             return
@@ -69,10 +69,10 @@ class Notifications: ObservableObject {
         }
         
         if K.notificationsLimit > 0 && withAlert && count >= K.notificationsLimit {
-            Alerts.show("With current settings there will be \(notificationsTotalCount) notifications which exceeds system limit, please adjust the settings. For now notifications are disabled.")
+            Alerts.show("With current settings there will be \(totalCount) notifications which exceeds system limit, please adjust the settings. For now notifications are disabled.")
         }
         
-        notificationsTotalCount = count
+        totalCount = count
         
         return count
     }

@@ -18,7 +18,6 @@ class Countdowns: ObservableObject {
     @Published private(set) var fullList: [Countdown] = []
     
     @Published private(set) var notIncludingTomorrowTodayOverridden: Bool = false
-    @Published private(set) var notificationsTotalCount = 0
     
     @AppStorage(K.StorageKeys.userPreferences) private var preferences = Preferences(x: DefaultUserPreferences())
     @AppStorage(K.StorageKeys.hiddenDailies) private var hiddenDailies = HideDaily(list: [HiddenDailyItem()])
