@@ -139,8 +139,7 @@ struct Countdown: Identifiable, Equatable {
             try fetchAndDelete()
             Countdowns.shared.refetchAll()
         } catch {
-            Countdowns.shared.alertMessage = "An error occurred while deleting countdown"
-            Countdowns.shared.showAlert = true
+            Alerts.show("An error occurred while deleting countdown")
         }
     }
     

@@ -14,13 +14,15 @@ struct OverrideDay: View {
     @State private var showConfirm = false
     @State private var confirmForDay = ""
     
+    private let dateHelper = DateHelper()
+    
     var body: some View {
         VStack {
             Text("Override Today As:")
             
             ForEach(K.weekdays, id: \.self) { day in
                 overrideButton(for: day)
-                    .disabled(todayName().lowercased() == day.lowercased())
+                    .disabled(dateHelper.weekdayName(allowOverride: true).lowercased() == day.lowercased())
             }
             
             Text("This will only affect Daily Countdowns for Today").font(.footnote).padding(.top)
@@ -32,7 +34,9 @@ struct OverrideDay: View {
         .padding()
         .confirmationDialog("Are you sure you want to override today as \(confirmForDay.capitalized)?", isPresented: $showConfirm) {
             Button("Yes, override") {
-                override(to: confirmForDay)
+                dateHelper.overrideToday(as: confirmForDay)
+                showConfirm = false
+                dismiss()
             }
             
             Button("Cancel", role: .cancel){
@@ -40,22 +44,6 @@ struct OverrideDay: View {
                 showConfirm = false
             }
         }
-    }
-    
-    func override(to day: String) {
-        countdowns.overrideToday(as: day)
-        dismiss()
-    }
-    
-    func todayName() -> String {
-        if let overridenAs = countdowns.todayIsOverriddenAs() {
-            return overridenAs
-        }
-        
-        let date = Date()
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "EEEE"
-        return dateFormatter.string(from: date)
     }
     
     func overrideButton(for day: String) -> some View {

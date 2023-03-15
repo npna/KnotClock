@@ -173,6 +173,7 @@ enum WhichIndication {
 enum CountdownResetLevel {
     case updateViewTimes
     case refetch
+    case resetNotifs
     case refetchResetNotifs
     case refetchWithDelayResetNotifs
     case reloadContainerRefetchResetNotifs

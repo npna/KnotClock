@@ -103,8 +103,7 @@ struct OverviewSingleCountdownWithAction: View {
             try moc.save()
             Countdowns.shared.reset(level: .refetchResetNotifs)
         } catch {
-            Countdowns.shared.alertMessage = error.localizedDescription
-            Countdowns.shared.showAlert = true
+            Alerts.show(error.localizedDescription)
         }
     }
 }

@@ -16,6 +16,8 @@ struct ApplicationSettingsView: View {
     @State private var showResetSettingsConfirmation = false
     @State private var showAlert = false
     @State private var alertMessage = ""
+    
+    private let backup = Backup()
 
     var body: some View {
         scrollViewOnMac {
@@ -112,13 +114,13 @@ struct ApplicationSettingsView: View {
                 Section {
                     HStack {
                         Button {
-                            Countdowns.shared.backup()
+                            backup.save()
                         } label: {
                             Label("Backup Countdowns", systemImage: "square.and.arrow.down.fill")
                         }
                         
                         Button {
-                            Countdowns.shared.restoreBackup()
+                            backup.restore()
                         } label: {
                             Label("Restore", systemImage: "square.and.arrow.up.fill")
                         }

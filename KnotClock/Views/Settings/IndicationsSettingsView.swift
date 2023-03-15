@@ -112,7 +112,7 @@ struct IndicationsSettingsView: View {
                     #if DEBUG
                     print("Resetting Notifications")
                     #endif
-                    countdowns.resetNotifications()
+                    countdowns.reset(level: .resetNotifs)
                 }
             })
             .alert(alertMessage, isPresented: $showAlert) {

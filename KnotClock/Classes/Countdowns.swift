@@ -7,7 +7,6 @@
 
 import SwiftUI
 import CoreData
-import UserNotifications
 
 class Countdowns: ObservableObject {
     static let shared = Countdowns()
@@ -18,16 +17,15 @@ class Countdowns: ObservableObject {
     @Published private(set) var hidden: [Countdown] = []
     @Published private(set) var fullList: [Countdown] = []
     
-    @Published var alertMessage = ""
-    @Published var showAlert = false
-    
     @Published private(set) var notIncludingTomorrowTodayOverridden: Bool = false
     @Published private(set) var notificationsTotalCount = 0
     
     @AppStorage(K.StorageKeys.userPreferences) private var preferences = Preferences(x: DefaultUserPreferences())
-    @AppStorage(K.StorageKeys.overrideDay) private var overrideDay = ""
     @AppStorage(K.StorageKeys.hiddenDailies) private var hiddenDailies = HideDaily(list: [HiddenDailyItem()])
     @AppStorage(K.StorageKeys.fetchedTomorrowDailies) private var fetchedTomorrowDailies: Bool = false
+    
+    private let notifications = Notifications.shared
+    private let dateHelper = DateHelper()
     
     private var timer: Timer? = nil
     private var oldTimerInterval: Double? = nil
@@ -117,109 +115,15 @@ class Countdowns: ObservableObject {
     }
     
     func updateViewShouldRefetch(_ dontRefetch: Bool) -> Bool {
-        let shouldRefetch = (dontRefetch == false && (lastRefetchDay != todayYMD() || shouldIncludeTomorrowDailies(inRangeOfRefreshTimerInterval: true)))
+        let shouldRefetch = (dontRefetch == false && (lastRefetchDay != dateHelper.todayYMD() || shouldIncludeTomorrowDailies(inRangeOfRefreshTimerInterval: true)))
         #if DEBUG
-        if lastRefetchDay != todayYMD() {
+        if lastRefetchDay != dateHelper.todayYMD() {
             print("Day has changed, refetched data.")
         } else if shouldRefetch {
             print("Time to include tomorrow's daily countdowns.")
         }
         #endif
         return shouldRefetch
-    }
-    
-    func resetNotifications() {
-        guard preferences.x.notificationCenterAuthorized == true else { return }
-        
-        UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
-        notificationsTotalCount = 0
-        
-        if countNotificationsForCurrentSettings(withAlert: true) >= K.notificationsLimit {
-            return
-        }
-        
-        DispatchQueue.global(qos: .userInitiated).asyncAfter(deadline: .now() + 0.1) {
-            self.addAllNotificationsWithoutChecks()
-        }
-    }
-    
-    func addAllNotificationsWithoutChecks() {
-        for countdown in fullList {
-            if preferences.x.firstCIEnabled && preferences.x.notificationOnFirstIndication {
-                let firstIndicationSeconds = TimeInterval(countdown.remainingSeconds - preferences.x.firstCIRemainingSeconds)
-                addNotification(countdown: countdown, willReach: "First Indication", inSeconds: firstIndicationSeconds)
-            }
-            
-            if preferences.x.secondCIEnabled && preferences.x.notificationOnSecondIndication {
-                let secondIndicationSeconds = TimeInterval(countdown.remainingSeconds - preferences.x.secondCIRemainingSeconds)
-                addNotification(countdown: countdown, willReach: "Second Indication", inSeconds: secondIndicationSeconds)
-            }
-            
-            if preferences.x.notificationOnCountdownHitsZero {
-                addNotification(countdown: countdown, willReach: "Zero", inSeconds: TimeInterval(countdown.remainingSeconds))
-            }
-        }
-        
-        #if DEBUG
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            UNUserNotificationCenter.current().getPendingNotificationRequests(completionHandler: { requests in
-                DispatchQueue.main.async {
-                    print("Pending Notifications: \(requests.count)")
-                }
-            })
-        }
-        #endif
-    }
-    
-    func countNotificationsForCurrentSettings(withAlert: Bool = false) -> Int {
-        var count = 0
-        
-        for _ in fullList {
-            if preferences.x.firstCIEnabled && preferences.x.notificationOnFirstIndication { count += 1 }
-            if preferences.x.secondCIEnabled && preferences.x.notificationOnSecondIndication { count += 1 }
-            if preferences.x.notificationOnCountdownHitsZero { count += 1 }
-        }
-        
-        if withAlert && count >= K.notificationsLimit {
-            alertMessage = "With current settings there will be \(notificationsTotalCount) notifications which exceeds system limit, please adjust the settings. For now notifications are disabled."
-            showAlert = true
-        }
-        
-        notificationsTotalCount = count
-        
-        return count
-    }
-    
-    func addNotification(countdown: Countdown, willReach: String, inSeconds: TimeInterval, repeatDailyCountdown: Bool = false) {
-        guard inSeconds > 0 else { return }
-        
-        let repeating = (countdown.category == .daily && repeatDailyCountdown) ? true : false
-        
-        let uniqueString = "\(countdown.id.uuidString)-\(willReach.replacingOccurrences(of: " ", with: ""))"
-        let content = UNMutableNotificationContent()
-        content.title = countdown.title
-        content.body = "\(countdown.title) has reached \(willReach)"
-        content.sound = .default
-        
-        let date = Date(timeIntervalSince1970: Date().timeIntervalSince1970 + inSeconds)
-        
-        var attachedComponents: Set<Calendar.Component> = [.weekday, .hour, .minute, .second]
-        if repeating {
-            attachedComponents = [.hour, .minute, .second]
-        }
-        let dateComponents = Calendar.current.dateComponents(attachedComponents, from: date)
-        
-        let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: repeating)
-        let request = UNNotificationRequest(identifier: uniqueString, content: content, trigger: trigger)
-        
-        let notificationCenter = UNUserNotificationCenter.current()
-        notificationCenter.add(request) { error in
-            if let error {
-                #if DEBUG
-                print(error.localizedDescription)
-                #endif
-            }
-        }
     }
     
     func refetchAll(resetNotifs: Bool = false) {
@@ -248,12 +152,12 @@ class Countdowns: ObservableObject {
             return lhs.remainingSeconds < rhs.remainingSeconds
         }
         
-        lastRefetchDay = todayYMD()
+        lastRefetchDay = dateHelper.todayYMD()
         
         updateViewTimes(dontRefetch: true)
         
         if resetNotifs {
-            resetNotifications()
+            notifications.reset(fullList: fullList)
         }
         
         #if DEBUG
@@ -276,12 +180,19 @@ class Countdowns: ObservableObject {
         switch level {
         case .updateViewTimes:
             updateViewTimes(dontRefetch: true)
+            
         case .refetch:
             refetchAll()
+            
+        case .resetNotifs:
+            notifications.reset(fullList: fullList)
+            
         case .refetchResetNotifs:
             refetchAll(resetNotifs: true)
+            
         case .refetchWithDelayResetNotifs:
             refetchWithDelay()
+            
         case .reloadContainerRefetchResetNotifs:
             DataController.shared.reload()
             refetchWithDelay()
@@ -330,7 +241,7 @@ class Countdowns: ObservableObject {
         let weekdays = K.weekdays
         notIncludingTomorrowTodayOverridden = false
         
-        if let _ = todayIsOverriddenAs() {
+        if let _ = dateHelper.todayIsOverriddenAs() {
             if shouldIncludeTomorrowDailies() {
                 notIncludingTomorrowTodayOverridden = true
             }
@@ -338,7 +249,7 @@ class Countdowns: ObservableObject {
         }
         
         guard shouldIncludeTomorrowDailies(),
-              let currentIndex = weekdays.firstIndex(of: todayName())
+              let currentIndex = weekdays.firstIndex(of: dateHelper.weekdayName(allowOverride: false))
         else {
             return nil
         }
@@ -349,7 +260,7 @@ class Countdowns: ObservableObject {
     }
     
     func getDailies(for day: String? = nil) -> [Daily] {
-        var selectedDay = getDayName()
+        var selectedDay = dateHelper.weekdayName(allowOverride: true)
         
         if let day, K.weekdays.contains(day.lowercased()) {
             selectedDay = day
@@ -423,56 +334,11 @@ class Countdowns: ObservableObject {
         }
     }
     
-    func getCurrentDate(withFomat: String = K.dateFormat) -> String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = K.dateFormat
-        return dateFormatter.string(from: Date())
-    }
-    
-    func overrideToday(as weekday: String) {
-        overrideDay = "\(getCurrentDate())=\(weekday.lowercased())"
-        
-        reset(level: .refetchResetNotifs)
-    }
-    
-    func todayIsOverriddenAs() -> String? {
-        let separated = overrideDay.components(separatedBy: "=")
-        
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = K.dateFormat
-        
-        if dateFormatter.string(from: Date()) == separated[0] && K.weekdays.contains(separated[1]) && todayName() != separated[1] {
-            return separated[1]
-        }
-        
-        return nil
-    }
-    
-    func getDayName(checkForOverride: Bool = true) -> String {
-        if checkForOverride, let overridden = todayIsOverriddenAs() {
-            return overridden
-        } else {
-            return todayName()
-        }
-    }
-    
-    func todayName() -> String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "EEEE"
-        return dateFormatter.string(from: Date()).lowercased()
-    }
-    
-    func todayYMD() -> Int {
-        let dateFromatter = DateFormatter()
-        dateFromatter.dateFormat = "yyyyMMdd"
-        return Int(dateFromatter.string(from: Date())) ?? 0
-    }
-    
     func hideDaily(_ id: UUID) {
         if Int.random(in: 1...10) == 1 {
             clearOldHiddenDaily()
         }
-        hiddenDailies.list.append(HiddenDailyItem(id: id, ymd: todayYMD()))
+        hiddenDailies.list.append(HiddenDailyItem(id: id, ymd: dateHelper.todayYMD()))
         refetchAll()
     }
     
@@ -482,14 +348,13 @@ class Countdowns: ObservableObject {
     }
     
     func isDailyHidden(_ id: UUID?) -> Bool {
-        if let _ = hiddenDailies.list.firstIndex(where: { $0.id == id && $0.ymd == todayYMD() }) {
+        if let _ = hiddenDailies.list.firstIndex(where: { $0.id == id && $0.ymd == dateHelper.todayYMD() }) {
             return true
         }
         return false
     }
     
     func clearOldHiddenDaily() {
-        hiddenDailies.list.removeAll(where: { $0.ymd < todayYMD() })
+        hiddenDailies.list.removeAll(where: { $0.ymd < dateHelper.todayYMD() })
     }
 }
-

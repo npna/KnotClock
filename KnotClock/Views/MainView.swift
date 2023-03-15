@@ -11,11 +11,13 @@ import Combine
 struct MainView: View {
     @Environment(\.managedObjectContext) var moc
     @EnvironmentObject private var countdowns: Countdowns
+    @ObservedObject private var alerts = Alerts.shared
     @State private var showAddCountdown = false
     @State private var showWeeklyOverviewSheet = false
     @State private var showOverrideDaySheet = false
     @State private var showHiddenSheet = false
     private var isInMenubar: Bool
+    private let dateHelper = DateHelper()
     
     @AppStorage(K.StorageKeys.userPreferences) private var preferences = Preferences(x: DefaultUserPreferences())
     
@@ -39,7 +41,7 @@ struct MainView: View {
             .onAppear {
                 countdowns.reset(level: .refetchResetNotifs)
             }
-            .alert(countdowns.alertMessage, isPresented: $countdowns.showAlert) {
+            .alert(alerts.message, isPresented: $alerts.isPresented) {
                 Button("OK"){}
             }
             .conditionalMofidier(!isInMenubar) { view in
@@ -61,7 +63,7 @@ struct MainView: View {
             }
             .padding()
             .toolbar {
-                if let overridenAs = countdowns.todayIsOverriddenAs() {
+                if let overridenAs = dateHelper.todayIsOverriddenAs() {
                     ToolbarItem(placement: .status) {
                         Text("Overridden as \(overridenAs.capitalized)").font(.footnote).foregroundColor(.secondary)
                     }
