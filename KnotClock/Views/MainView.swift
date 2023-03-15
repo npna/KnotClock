@@ -37,7 +37,7 @@ struct MainView: View {
                 }
             }
             .onAppear {
-                countdowns.refetchAllAndHandleNotifications()
+                countdowns.reset(level: .refetchResetNotifs)
             }
             .alert(countdowns.alertMessage, isPresented: $countdowns.showAlert) {
                 Button("OK"){}

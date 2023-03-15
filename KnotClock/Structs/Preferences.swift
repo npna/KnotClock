@@ -21,7 +21,7 @@ struct Preferences<DefaultUserPreferences: Codable> {
             
             x = decoded
             
-            Countdowns.shared.clearAndRefetch()
+            Countdowns.shared.reset(level: .refetchResetNotifs)
         }
     }
 }

@@ -12,6 +12,8 @@ typealias RemainingTimeDetails = (d: String, h: String, m: String, s: String, in
 struct K {
     static let appName = "KnotClock"
     
+    static let enableBackupRestoreOnMacOS = false // requires "User Selected File Read app sandbox entitlement" (disabled by default)
+    
     static let refreshThresholdHideSeconds: TimeInterval = 20
     static let timerAccuracyOptions: [(title: String, time: TimeInterval)] = [
         ("Lowest", 60),
@@ -166,4 +168,12 @@ enum WhichIndication {
     case first
     case second
     case neither
+}
+
+enum CountdownResetLevel {
+    case updateViewTimes
+    case refetch
+    case refetchResetNotifs
+    case refetchWithDelayResetNotifs
+    case reloadContainerRefetchResetNotifs
 }

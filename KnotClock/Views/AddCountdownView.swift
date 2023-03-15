@@ -131,7 +131,7 @@ struct AddCountdownView: View {
         
         do {
             try moc.save()
-            Countdowns.shared.refetchAllAndHandleNotifications()
+            Countdowns.shared.reset(level: .refetchResetNotifs)
             dismiss()
         } catch {
             moc.reset()

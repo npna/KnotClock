@@ -222,7 +222,7 @@ class Countdowns: ObservableObject {
         }
     }
     
-    func refetchAll() {
+    func refetchAll(resetNotifs: Bool = false) {
         fullList.removeAll()
         
         let dailies = getDailies()
@@ -252,6 +252,10 @@ class Countdowns: ObservableObject {
         
         updateViewTimes(dontRefetch: true)
         
+        if resetNotifs {
+            resetNotifications()
+        }
+        
         #if DEBUG
         print("Refetched All")
         #endif
@@ -259,18 +263,29 @@ class Countdowns: ObservableObject {
     
     // TODO: Implement a better approach
     // without this MainView won't update after editing Single/Daily countdowns
-    func clearAndRefetch(delay: TimeInterval = 0.5) {
+    func refetchWithDelay(_ delay: TimeInterval = 0.5) {
         fullList.removeAll()
         updateViewTimes(dontRefetch: true)
         
         DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
-            self.refetchAllAndHandleNotifications()
+            self.refetchAll(resetNotifs: true)
         }
     }
     
-    func refetchAllAndHandleNotifications() {
-        refetchAll()
-        resetNotifications()
+    func reset(level: CountdownResetLevel) {        
+        switch level {
+        case .updateViewTimes:
+            updateViewTimes(dontRefetch: true)
+        case .refetch:
+            refetchAll()
+        case .refetchResetNotifs:
+            refetchAll(resetNotifs: true)
+        case .refetchWithDelayResetNotifs:
+            refetchWithDelay()
+        case .reloadContainerRefetchResetNotifs:
+            DataController.shared.reload()
+            refetchWithDelay()
+        }
     }
     
     func thereAreNoCountdowns() -> Bool {
@@ -408,14 +423,16 @@ class Countdowns: ObservableObject {
         }
     }
     
-    func overrideToday(as weekday: String) {
+    func getCurrentDate(withFomat: String = K.dateFormat) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = K.dateFormat
+        return dateFormatter.string(from: Date())
+    }
+    
+    func overrideToday(as weekday: String) {
+        overrideDay = "\(getCurrentDate())=\(weekday.lowercased())"
         
-        let dateString = dateFormatter.string(from: Date())
-        overrideDay = "\(dateString)=\(weekday.lowercased())"
-        
-        clearAndRefetch()
+        reset(level: .refetchResetNotifs)
     }
     
     func todayIsOverriddenAs() -> String? {
@@ -475,3 +492,4 @@ class Countdowns: ObservableObject {
         hiddenDailies.list.removeAll(where: { $0.ymd < todayYMD() })
     }
 }
+

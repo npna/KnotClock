@@ -101,7 +101,7 @@ struct OverviewSingleCountdownWithAction: View {
     func saveMOC(didEdit: Bool = true) {
         do {
             try moc.save()
-            Countdowns.shared.clearAndRefetch()
+            Countdowns.shared.reset(level: .refetchResetNotifs)
         } catch {
             Countdowns.shared.alertMessage = error.localizedDescription
             Countdowns.shared.showAlert = true
