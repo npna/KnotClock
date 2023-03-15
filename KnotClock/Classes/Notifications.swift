@@ -11,6 +11,8 @@ import UserNotifications
 class Notifications: ObservableObject {
     static let shared = Notifications()
     
+    private init() {}
+    
     @AppStorage(K.StorageKeys.userPreferences) private var preferences = Preferences(x: DefaultUserPreferences())
     @Published private(set) var notificationsTotalCount = 0
     

@@ -10,6 +10,8 @@ import Foundation
 class Alerts: ObservableObject {
     static let shared = Alerts()
     
+    private init() {}
+    
     @Published var message = ""
     @Published var isPresented = false
     

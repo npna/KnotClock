@@ -17,16 +17,13 @@ class DataController: ObservableObject {
         load()
     }
     
+    func reload() { load() }
     func load() {
         container.loadPersistentStores { description, error in
             if let error {
                 fatalError("Error when loading CoreData: \(error.localizedDescription)")
             }
         }
-    }
-    
-    func reload() {
-        load()
     }
 }
 

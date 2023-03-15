@@ -31,7 +31,7 @@ class Countdowns: ObservableObject {
     private var oldTimerInterval: Double? = nil
     private var lastRefetchDay: Int = 0
     
-    init() {
+    private init() {
         rescheduleTimer(interval: preferences.x.refreshTimerInterval)
     }
     
