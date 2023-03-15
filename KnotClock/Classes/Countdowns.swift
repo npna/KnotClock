@@ -324,7 +324,7 @@ class Countdowns: ObservableObject {
         }
         
         do {
-            let results = try DataController.context.fetch(fetchRequest)
+            let results = try DataController.sharedContext.fetch(fetchRequest)
             return results
         } catch {
             #if DEBUG

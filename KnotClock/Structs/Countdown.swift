@@ -144,7 +144,7 @@ struct Countdown: Identifiable, Equatable {
     }
     
     func fetchAndDelete() throws {
-        let moc = DataController.context
+        let moc = DataController.sharedContext
         let fetch = try self.fetchFromDB()
         
         switch category {
@@ -166,11 +166,11 @@ struct Countdown: Identifiable, Equatable {
         fetchRequest.predicate = NSPredicate(format: "id == %@", id as CVarArg)
         fetchRequest.fetchLimit = 1
         
-        return try DataController.context.fetch(fetchRequest).first
+        return try DataController.sharedContext.fetch(fetchRequest).first
     }
     
     func saveMOC() throws {
-        try DataController.context.save()
+        try DataController.sharedContext.save()
     }
 }
 
