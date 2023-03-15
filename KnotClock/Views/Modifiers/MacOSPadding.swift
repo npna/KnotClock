@@ -28,4 +28,8 @@ extension View {
     func macOSPadding(_ edges: Edge.Set = .all, _ length: CGFloat? = nil) -> some View {
         self.modifier(MacOSPadding(edges: edges, length: length))
     }
+    
+    func macOSPadding(_ length: CGFloat? = nil) -> some View {
+        self.modifier(MacOSPadding(length: length))
+    }
 }
