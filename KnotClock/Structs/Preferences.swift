@@ -27,7 +27,7 @@ struct Preferences<DefaultUserPreferences: Codable> {
 }
 
 struct DefaultUserPreferences: Codable {
-    var refreshTimerInterval = 20.0
+    var refreshTimerInterval = 1.0
     var showZeroHourMinute = true
     var showApplicationIn: MacSAISettings = .both
     var menubarIconSettings: MacMenubarIconSettings = .simpleIcon
