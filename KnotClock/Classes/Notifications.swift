@@ -69,7 +69,7 @@ class Notifications: ObservableObject {
         }
         
         if K.notificationsLimit > 0 && withAlert && count >= K.notificationsLimit {
-            Alerts.show("With current settings there will be \(totalCount) notifications which exceeds system limit, please adjust the settings. For now notifications are disabled.")
+            Alerts.show("With current settings there will be \(count) notifications which exceeds system limit, please adjust the settings. For now notifications are disabled.")
         }
         
         totalCount = count
