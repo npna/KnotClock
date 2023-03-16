@@ -147,6 +147,8 @@ class Countdowns: ObservableObject {
             fullList.append(Countdown(id: single.id ?? UUID(), title: single.title ?? "", category: .single, time: Int(single.deadlineEpoch)))
         }
         
+        fullList = Array(Set(fullList))
+        
         fullList.sort { lhs, rhs in
             return lhs.remainingSeconds < rhs.remainingSeconds
         }
