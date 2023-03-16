@@ -58,9 +58,6 @@ struct MainView: View {
             .sheet(isPresented: $showHiddenSheet) {
                 HiddenCountdowns()
             }
-            .onChange(of: preferences.x.refreshTimerInterval) { newValue in
-                countdowns.rescheduleTimer(interval: newValue)
-            }
             .padding()
             .toolbar {
                 if let overridenAs = dateHelper.todayIsOverriddenAs() {

@@ -110,9 +110,6 @@ struct IndicationsSettingsView: View {
             .onChange(of: notificationNeedsUpdate, perform: { newValue in
                 timer?.invalidate()
                 timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false) { _ in
-                    #if DEBUG
-                    print("Resetting Notifications")
-                    #endif
                     countdowns.reset(level: .resetNotifs)
                 }
             })

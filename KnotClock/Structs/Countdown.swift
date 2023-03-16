@@ -8,7 +8,7 @@
 import Foundation
 import CoreData
 
-struct Countdown: Identifiable, Equatable {
+struct Countdown: Identifiable, Hashable, Equatable {
     typealias DHMS = (d: Int, h: Int, m: Int, s: Int)
     let id: UUID
     let title: String
@@ -120,6 +120,10 @@ struct Countdown: Identifiable, Equatable {
         return lhs.id == rhs.id
     }
     
+    func hash(into hasher: inout Hasher) {
+      hasher.combine(id)
+    }
+    
     // Core Data
     func deleteExpiredSingleHideDaily(dontCheckRemainingSeconds: Bool = false) {
         if category == .daily {
@@ -137,7 +141,7 @@ struct Countdown: Identifiable, Equatable {
         
         do {
             try fetchAndDelete()
-            Countdowns.shared.refetchAll()
+            Countdowns.shared.reset(level: .refetch)
         } catch {
             Alerts.show("An error occurred while deleting countdown")
         }

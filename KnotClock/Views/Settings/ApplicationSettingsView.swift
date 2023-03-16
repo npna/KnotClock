@@ -89,6 +89,10 @@ struct ApplicationSettingsView: View {
                             Text("\(title) (~\(time.formatted()) seconds)\(hidesSeconds)").tag(time)
                         }
                     }
+                    .onChange(of: preferences.x.refreshTimerInterval) { newValue in
+                        Countdowns.shared.rescheduleTimer(interval: newValue)
+                    }
+                    
                     Text("Timers \(K.refreshThresholdHideSeconds.formatted()) and above hide \"seconds\" part in countdown.").font(.footnote)
                     Text("Higher accuracy consumes more power.").font(.footnote)
                 }

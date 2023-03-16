@@ -26,7 +26,11 @@ class Notifications: ObservableObject {
             return
         }
         
-        DispatchQueue.global(qos: .userInitiated).asyncAfter(deadline: .now() + 0.2) {
+        #if DEBUG
+        print("Resetting Notifications")
+        #endif
+        
+        DispatchQueue.global(qos: .userInitiated).asyncAfter(deadline: .now() + 0.3) {
             self.addAllWithoutChecks(fullList)
         }
     }

@@ -40,10 +40,10 @@ struct DefaultUserPreferences: Codable {
     var currentCountdownStyle: UpcommingAndExpiredSettings = .fullSize
     
     var upcommingCountdownStyle: UpcommingAndExpiredSettings = .small
-    var maxUpcomming: Double = min(3, K.maxUpExSliderValue) // is Double to use with slider
+    var maxUpcomming: Double = min(5, K.maxUpExSliderValue) // is Double to use with slider
     
     var expiredCountdownStyle: UpcommingAndExpiredSettings = .small
-    var maxExpired: Double = min(2, K.maxUpExSliderValue)
+    var maxExpired: Double = min(8, K.maxUpExSliderValue)
     var autoHideExpiredDailies: Bool = false
     var autoRemoveExpiredSingles: Bool = false
     
