@@ -171,11 +171,11 @@ enum WhichIndication {
     case neither
 }
 
-enum CountdownResetLevel {
-    case updateViewTimes
-    case refetch
-    case resetNotifs
-    case refetchResetNotifs
-    case refetchWithDelayResetNotifs
-    case reloadContainerRefetchResetNotifs
+enum CountdownResetLevel: String, CaseIterable {
+    case updateViewTimes = "Update View Time"
+    case refetch = "Refetch"
+    case resetNotifs = "Reset Notifications"
+    case refetchResetNotifs = "Refetch and Reset Notifications"
+    case refetchWithDelayResetNotifs = "Refetch with Delay, then Reset Notifications"
+    case reloadContainerRefetchResetNotifs = "Reload Containers then Refetch and Reset Notifications"    
 }
