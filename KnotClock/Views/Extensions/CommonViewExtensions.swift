@@ -40,12 +40,12 @@ extension View {
             separator
         }
         
-        if preferences.x.showZeroHourMinute || remainingTime.inSeconds >= 3600 || preferences.x.refreshTimerInterval >= 30 {
+        if preferences.x.showZeroHourMinute || remainingTime.inSeconds >= 3600 || preferences.x.refreshTimerInterval >= K.refreshThresholdHideSeconds {
             Text(remainingTime.h).timeSliced(timeSlicedMode)
             separator
         }
         
-        if preferences.x.showZeroHourMinute || remainingTime.inSeconds >= 60 || preferences.x.refreshTimerInterval >= 30 {
+        if preferences.x.showZeroHourMinute || remainingTime.inSeconds >= 60 || preferences.x.refreshTimerInterval >= K.refreshThresholdHideSeconds {
             Text(remainingTime.m).timeSliced(timeSlicedMode)
             if preferences.x.refreshTimerInterval < K.refreshThresholdHideSeconds {
                 separator
