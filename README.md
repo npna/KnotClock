@@ -5,7 +5,9 @@
 <h1 align="center">KnotClock</h1>
 <p align="center">
 A very customizable Countdowns & Reminders app for macOS and iOS that can do Daily, Weekly and Single countdowns.
-<img width="752" alt="KnotClock" src="https://user-images.githubusercontent.com/80475242/225621277-bb80c8a1-f645-4401-ab94-826768cdba15.png">
+
+<img alt="KnotClock Mac" src="https://user-images.githubusercontent.com/80475242/225621277-bb80c8a1-f645-4401-ab94-826768cdba15.png" width="55%"></img><img alt="KnotClock Menubar" src="https://user-images.githubusercontent.com/80475242/225632546-73b1d42f-bc32-4312-8d9d-d47828841e79.png" width="44%"></img>
+
 </p>
 
 ---
