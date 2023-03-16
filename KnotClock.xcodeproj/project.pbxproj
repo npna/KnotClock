@@ -11,6 +11,7 @@
 		0D18A3A929C21D9F00D075D4 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D18A3A829C21D9F00D075D4 /* Notifications.swift */; };
 		0D18A3AB29C21F1F00D075D4 /* Alerts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D18A3AA29C21F1F00D075D4 /* Alerts.swift */; };
 		0D18A3AD29C2231000D075D4 /* DateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D18A3AC29C2231000D075D4 /* DateHelper.swift */; };
+		0D30DE9F29C3394D00B2430D /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 0D30DE9E29C3394D00B2430D /* Credits.rtf */; };
 		0D803C0229C0B62100C7F4BE /* ContextualMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D803C0129C0B62100C7F4BE /* ContextualMenu.swift */; };
 		0D803C0429C0B7BA00C7F4BE /* HiddenCountdowns.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D803C0329C0B7BA00C7F4BE /* HiddenCountdowns.swift */; };
 		0DA02AE529BD1DC200CEBB8F /* ConditionalModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DA02AE429BD1DC200CEBB8F /* ConditionalModifier.swift */; };
@@ -55,6 +56,7 @@
 		0D18A3A829C21D9F00D075D4 /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
 		0D18A3AA29C21F1F00D075D4 /* Alerts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alerts.swift; sourceTree = "<group>"; };
 		0D18A3AC29C2231000D075D4 /* DateHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateHelper.swift; sourceTree = "<group>"; };
+		0D30DE9E29C3394D00B2430D /* Credits.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = Credits.rtf; sourceTree = "<group>"; };
 		0D803C0129C0B62100C7F4BE /* ContextualMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContextualMenu.swift; sourceTree = "<group>"; };
 		0D803C0329C0B7BA00C7F4BE /* HiddenCountdowns.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HiddenCountdowns.swift; sourceTree = "<group>"; };
 		0DA02AE429BD1DC200CEBB8F /* ConditionalModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConditionalModifier.swift; sourceTree = "<group>"; };
@@ -135,6 +137,7 @@
 				0DCA4C1029BBAB3400F78368 /* Assets.xcassets */,
 				0DCA4C5829BBABE000F78368 /* Colors.xcassets */,
 				0DCA4C1229BBAB3400F78368 /* KnotClock.entitlements */,
+				0D30DE9E29C3394D00B2430D /* Credits.rtf */,
 				0DCA4C1329BBAB3400F78368 /* Preview Content */,
 			);
 			path = KnotClock;
@@ -313,6 +316,7 @@
 				0DCA4C5929BBABE000F78368 /* Colors.xcassets in Resources */,
 				0DCA4C1529BBAB3400F78368 /* Preview Assets.xcassets in Resources */,
 				0DCA4C1129BBAB3400F78368 /* Assets.xcassets in Resources */,
+				0D30DE9F29C3394D00B2430D /* Credits.rtf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -483,7 +487,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = KnotClock/KnotClock.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 13;
+				CURRENT_PROJECT_VERSION = 14;
 				DEVELOPMENT_ASSET_PATHS = "\"KnotClock/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -520,7 +524,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = KnotClock/KnotClock.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 13;
+				CURRENT_PROJECT_VERSION = 14;
 				DEVELOPMENT_ASSET_PATHS = "\"KnotClock/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;

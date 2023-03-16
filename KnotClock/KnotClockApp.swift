@@ -34,7 +34,21 @@ struct KnotClockApp: App {
         Window(K.appName, id: K.appName) {
             mainView()
                 .frame(minWidth: K.FrameSizes.Mac.Main.minWidth, maxWidth: .infinity, minHeight: K.FrameSizes.Mac.Main.minHeight, maxHeight: .infinity)
-        }.defaultSize(width: K.FrameSizes.Mac.Main.minWidth, height: K.FrameSizes.Mac.Main.minHeight)
+        }
+        .defaultSize(width: K.FrameSizes.Mac.Main.minWidth, height: K.FrameSizes.Mac.Main.minHeight)
+        .commands {
+            CommandGroup(replacing: .appInfo) {
+                Button("About \(K.appName)") {
+                    NSApplication.shared.orderFrontStandardAboutPanel(
+                        options: [
+                            NSApplication.AboutPanelOptionKey(
+                                rawValue: "Copyright"
+                            ): "© \(K.copyright.year) \(K.copyright.creator)"
+                        ]
+                    )
+                }
+            }
+        }
         
         Settings {
             SettingsView().applyColorScheme()
