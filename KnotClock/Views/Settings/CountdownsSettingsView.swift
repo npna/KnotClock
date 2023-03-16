@@ -10,68 +10,75 @@ import SwiftUI
 struct CountdownsSettingsView: View {
     @AppStorage(K.StorageKeys.userPreferences) private var preferences = Preferences(x: DefaultUserPreferences())
     
+    private var needsRefetch: [String] {[
+        preferences.x.autoHideExpiredDailies.description,
+        preferences.x.autoRemoveExpiredSingles.description,
+        preferences.x.maxUpcomming.description,
+        preferences.x.maxExpired.description,
+        preferences.x.includeSingleCountdownsInListSecondsEarlier.description,
+        preferences.x.includeTomorrowDailiesInTodaySecondsEarlier.description
+    ]}
+    
     var body: some View {
         scrollViewOnMac {
             Form {
-                Group {
-                    Section("Current Countdown(s)") {
-                        Picker("List Type", selection: $preferences.x.currentCountdownStyle) {
-                            ForEach(UpcommingAndExpiredSettings.allCases) { setting in
-                                if [.tiny,.small,.fullSize].contains(setting) {
-                                    Text(setting.rawValue).tag(setting)
-                                }
-                            }
-                        }
-                        .pickerStyle(.segmented)
-                        
-                        Text("There might be multiple current countdowns if they have the same expiring time.").font(.footnote)
-                    }
-                    
-                    macOSDevider()
-                    
-                    Section("Upcomming Countdowns") {
-                        Picker("List Type", selection: $preferences.x.upcommingCountdownStyle) {
-                            ForEach(UpcommingAndExpiredSettings.allCases) { setting in
+                Section("Current Countdown(s)") {
+                    Picker("List Type", selection: $preferences.x.currentCountdownStyle) {
+                        ForEach(UpcommingAndExpiredSettings.allCases) { setting in
+                            if [.tiny,.small,.fullSize].contains(setting) {
                                 Text(setting.rawValue).tag(setting)
                             }
                         }
-                        .pickerStyle(.segmented)
-                        
-                        Slider(value: $preferences.x.maxUpcomming, in: K.minUpExSliderValue...K.maxUpExSliderValue, step: 1) {
-                            Text("Max. visible")
-                        } minimumValueLabel: {
-                            Text("\(K.minUpExSliderValue.formatted())")
-                        } maximumValueLabel: {
-                            Text("\(K.maxUpExSliderValue.formatted())")
-                        }
-                        .disabled(preferences.x.upcommingCountdownStyle == .hide)
                     }
+                    .pickerStyle(.segmented)
                     
-                    macOSDevider()
-                    
-                    Section("Expired Countdowns") {
-                        Picker("List Type", selection: $preferences.x.expiredCountdownStyle) {
-                            ForEach(UpcommingAndExpiredSettings.allCases) { setting in
-                                Text(setting.rawValue).tag(setting)
-                            }
-                        }
-                        .pickerStyle(.segmented)
-                        
-                        Slider(value: $preferences.x.maxExpired, in: K.minUpExSliderValue...K.maxUpExSliderValue, step: 1) {
-                            Text("Max. visible")
-                        } minimumValueLabel: {
-                            Text("\(K.minUpExSliderValue.formatted())")
-                        } maximumValueLabel: {
-                            Text("\(K.maxUpExSliderValue.formatted())")
-                        }
-                        .disabled(preferences.x.expiredCountdownStyle == .hide)
-                        
-                        Toggle("Auto-hide Expired Daily Countdowns", isOn: $preferences.x.autoHideExpiredDailies)
-                        Toggle("Auto-remove Expired Single Countdowns", isOn: $preferences.x.autoRemoveExpiredSingles)
-                    }
-                    
-                    macOSDevider()
+                    Text("There might be multiple current countdowns if they have the same expiring time.").font(.footnote)
                 }
+                
+                macOSDevider()
+                
+                Section("Upcomming Countdowns") {
+                    Picker("List Type", selection: $preferences.x.upcommingCountdownStyle) {
+                        ForEach(UpcommingAndExpiredSettings.allCases) { setting in
+                            Text(setting.rawValue).tag(setting)
+                        }
+                    }
+                    .pickerStyle(.segmented)
+                    
+                    Slider(value: $preferences.x.maxUpcomming, in: K.minUpExSliderValue...K.maxUpExSliderValue, step: 1) {
+                        Text("Max. visible")
+                    } minimumValueLabel: {
+                        Text("\(K.minUpExSliderValue.formatted())")
+                    } maximumValueLabel: {
+                        Text("\(K.maxUpExSliderValue.formatted())")
+                    }
+                    .disabled(preferences.x.upcommingCountdownStyle == .hide)
+                }
+                
+                macOSDevider()
+                
+                Section("Expired Countdowns") {
+                    Picker("List Type", selection: $preferences.x.expiredCountdownStyle) {
+                        ForEach(UpcommingAndExpiredSettings.allCases) { setting in
+                            Text(setting.rawValue).tag(setting)
+                        }
+                    }
+                    .pickerStyle(.segmented)
+                    
+                    Slider(value: $preferences.x.maxExpired, in: K.minUpExSliderValue...K.maxUpExSliderValue, step: 1) {
+                        Text("Max. visible")
+                    } minimumValueLabel: {
+                        Text("\(K.minUpExSliderValue.formatted())")
+                    } maximumValueLabel: {
+                        Text("\(K.maxUpExSliderValue.formatted())")
+                    }
+                    .disabled(preferences.x.expiredCountdownStyle == .hide)
+                    
+                    Toggle("Auto-hide Expired Daily Countdowns", isOn: $preferences.x.autoHideExpiredDailies)
+                    Toggle("Auto-remove Expired Single Countdowns", isOn: $preferences.x.autoRemoveExpiredSingles)
+                }
+                
+                macOSDevider()
                 
                 Section() {
                     Text("When to include Single Countdowns in the upcomming list?")
@@ -86,9 +93,6 @@ struct CountdownsSettingsView: View {
                         Text("30 days earlier").tag(86400 * 30)
                         Text("Always").tag(-1)
                     }
-                    .onChange(of: preferences.x.includeSingleCountdownsInListSecondsEarlier) { _ in
-                        Countdowns.shared.refetchAll()
-                    }
                     
                     Text("How much earlier to include tomorrow's daily countdowns")
                     Picker("", selection: $preferences.x.includeTomorrowDailiesInTodaySecondsEarlier) {
@@ -100,10 +104,10 @@ struct CountdownsSettingsView: View {
                         Text("12 hours before the day ends").tag(3600 * 12)
                         Text("Always (show today and tomorrow)").tag(3600 * 24)
                     }
-                    .onChange(of: preferences.x.includeTomorrowDailiesInTodaySecondsEarlier) { _ in
-                        Countdowns.shared.refetchAll()
-                    }
                 }
+            }
+            .onChange(of: needsRefetch) { _ in
+                Countdowns.shared.reset(level: .refetch)
             }
         }
     }
