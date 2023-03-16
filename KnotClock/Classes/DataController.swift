@@ -89,7 +89,7 @@ extension DataController {
         }
     }
     
-    func clearAndFillWithRandomData(confirm: Bool, countdownsTotal: Int = 30) {
+    func clearAndFillWithRandomData(confirm: Bool, countdownsTotal: Int = 20) {
         guard confirm else { return }
         clearEntireCoreData(confirm: confirm, reset: false)
         
