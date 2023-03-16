@@ -11,7 +11,7 @@ typealias RemainingTimeDetails = (d: String, h: String, m: String, s: String, in
 
 struct K {
     static let appName = "KnotClock"
-    static let copyright = (creator: "NA", year: "2023") // feel free to change after forking project
+    static let copyright = (creator: "NA", year: "2023") // feel free to change after forking project and remember to change Credits.rtf file too
     
     static let enableBackupRestoreOnMacOS = false // requires "User Selected File Read app sandbox entitlement" (disabled by default)
     
