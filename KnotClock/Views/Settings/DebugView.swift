@@ -27,7 +27,7 @@ struct DebugView: View {
                     DataController.shared.clearAndFillWithRandomData(confirm: confirmed)
                 }
                 
-                Text("Warning - This menu is only intended for testing purposes. Pressing the buttons above will remove your countdowns permanently!").foregroundColor(.red).bold().padding(.top)
+                Text("Warning - These options are only intended for testing purposes. Pressing the buttons above will remove your countdowns permanently!").foregroundColor(.red).bold().padding(.top)
                 
                 Section("Refresh with Level") {
                     Picker("Level", selection: $level) {

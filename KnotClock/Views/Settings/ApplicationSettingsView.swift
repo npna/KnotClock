@@ -101,7 +101,7 @@ struct ApplicationSettingsView: View {
                     .disabled(preferences.x.refreshTimerInterval >= K.refreshThresholdHideSeconds)
                 
                 if preferences.x.refreshTimerInterval >= K.refreshThresholdHideSeconds {
-                    Text("This option is disabled when Timer is \(K.refreshThresholdHideSeconds.formatted())+ seconds.").font(.footnote)
+                    Text("This option is always enabled when Timer Accuracy is \(K.refreshThresholdHideSeconds.formatted())+ seconds.").font(.footnote)
                 }
                 
                 macOSDevider()
