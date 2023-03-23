@@ -13,6 +13,7 @@ struct HideDaily<HiddenDailyList: Codable> {
 
 struct HiddenDailyItem: Codable {
     var id: UUID = UUID()
+    var isForTomorrow: Bool = false
     var ymd: Int = 2100_01_01
 }
 

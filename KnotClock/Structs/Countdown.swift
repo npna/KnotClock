@@ -17,6 +17,10 @@ struct Countdown: Identifiable, Hashable, Equatable {
     var isForTomorrow: Bool = false
     var isHidden: Bool = false
     
+    var idDifenerentiatingTomorrow: String {
+        "\(id.uuidString)-\(isForTomorrow.description)"
+    }
+    
     var entityName: String {
         (self.category == .daily) ? "Daily" : "Single"
     }
@@ -116,18 +120,10 @@ struct Countdown: Identifiable, Hashable, Equatable {
         return Calendar.current.date(byAdding: addTimeComponents, to: startingDate)
     }
     
-    static func ==(lhs: Countdown, rhs: Countdown) -> Bool {
-        return lhs.id == rhs.id
-    }
-    
-    func hash(into hasher: inout Hasher) {
-      hasher.combine(id)
-    }
-    
     // Core Data
     func deleteExpiredSingleHideDaily(dontCheckRemainingSeconds: Bool = false) {
         if category == .daily {
-            Countdowns.shared.hideDaily(id)
+            Countdowns.shared.hideDaily(id, isForTomorrow: isForTomorrow)
         } else {
             guard remainingSeconds < 0 || dontCheckRemainingSeconds else { return }
             delete()
@@ -175,6 +171,16 @@ struct Countdown: Identifiable, Hashable, Equatable {
     
     func saveMOC() throws {
         try DataController.sharedContext.save()
+    }
+    
+    // Hash and Compare
+    static func ==(lhs: Countdown, rhs: Countdown) -> Bool {
+        return lhs.id == rhs.id && lhs.isForTomorrow == rhs.isForTomorrow
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+        hasher.combine(isForTomorrow.description)
     }
 }
 

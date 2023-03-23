@@ -15,7 +15,7 @@ struct ContextualMenu: ViewModifier {
         content.contextMenu {
             if countdown.isHidden {
                 Button {
-                    Countdowns.shared.unhideDaily(countdown.id)
+                    Countdowns.shared.unhideDaily(countdown.id, isForTomorrow: countdown.isForTomorrow)
                 } label: {
                     Label("Unhide", systemImage: "eye").labelStyle(.titleAndIcon)
                 }

@@ -12,20 +12,20 @@ extension View {
     func tiny(_ cds: [Countdown]) -> some View {
         let width = K.FrameSizes.AllPlatforms.tinyCountdownWidth
         return LazyVGrid(columns: [GridItem(.adaptive(minimum: width, maximum: width))], alignment: .leading) {
-            ForEach(cds) { countdown in
+            ForEach(cds, id: \.idDifenerentiatingTomorrow) { countdown in
                 Tiny(countdown)
             }
         }
     }
     
     func small(_ cds: [Countdown]) -> some View {
-        ForEach(cds) { countdown in
+        ForEach(cds, id: \.idDifenerentiatingTomorrow) { countdown in
             Small(countdown)
         }
     }
     
     func fullSize(_ cds: [Countdown], forcingExpired: Bool = false) -> some View {
-        ForEach(cds) { countdown in
+        ForEach(cds, id: \.idDifenerentiatingTomorrow) { countdown in
             FullSize(countdown, forcingExpired: forcingExpired)
         }
     }

@@ -76,7 +76,7 @@ class Countdowns: ObservableObject {
                 
                 switch item.category {
                 case .daily:
-                    if autoHideExpiredDailies || isDailyHidden(item.id) {
+                    if autoHideExpiredDailies || isDailyHidden(item) {
                         continue
                     }
                 case .single:
@@ -89,7 +89,7 @@ class Countdowns: ObservableObject {
                 countEx += 1
                 expired.append(item)
             }
-            else if item.category == .daily && isDailyHidden(item.id) {
+            else if item.category == .daily && isDailyHidden(item) {
                 hidden.append(Countdown(id: item.id, title: item.title, category: .daily, time: item.time, isHidden: true))
             }
             else if lowestRemainingSeconds == nil
@@ -335,21 +335,23 @@ class Countdowns: ObservableObject {
         }
     }
     
-    func hideDaily(_ id: UUID) {
+    func hideDaily(_ id: UUID, isForTomorrow: Bool) {
         if Int.random(in: 1...10) == 1 {
             clearOldHiddenDaily()
         }
-        hiddenDailies.list.append(HiddenDailyItem(id: id, ymd: dateHelper.todayYMD()))
+        hiddenDailies.list.append(HiddenDailyItem(id: id, isForTomorrow: isForTomorrow, ymd: dateHelper.todayYMD()))
         refetchAll()
     }
     
-    func unhideDaily(_ id: UUID) {
-        hiddenDailies.list.removeAll(where: { $0.id == id })
+    func unhideDaily(_ id: UUID, isForTomorrow: Bool) {
+        hiddenDailies.list.removeAll(where: { $0.id == id && $0.isForTomorrow == isForTomorrow })
         refetchAll()
     }
     
-    func isDailyHidden(_ id: UUID?) -> Bool {
-        if let _ = hiddenDailies.list.firstIndex(where: { $0.id == id && $0.ymd == dateHelper.todayYMD() }) {
+    func isDailyHidden(_ countdown: Countdown) -> Bool {
+        let id = countdown.id
+        let isForTomorrow = countdown.isForTomorrow
+        if let _ = hiddenDailies.list.firstIndex(where: { $0.id == id && $0.ymd == dateHelper.todayYMD() && $0.isForTomorrow == isForTomorrow }) {
             return true
         }
         return false
