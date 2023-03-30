@@ -20,9 +20,9 @@ iOS/iPadOS 16.0+
 # Installation on macOS
 [Download the latest version here](https://github.com/npna/KnotClock/releases) or clone and build the project yourself.
 
-# Installation on iOS/iPadOS
-1. Download [Xcode](https://apps.apple.com/us/app/xcode/id497799835)
-2. Clone the project (Xcode -> Clone an Existing Project -> https://github.com/npna/KnotClock.git)
+# Installation on iOS/iPadOS 16.0+ (You'll need macOS Ventura 13.0+ to install Xcode 14)
+1. Download [Xcode](https://apps.apple.com/us/app/xcode/id497799835) 14
+2. Clone the project (Open Xcode -> Click Clone an Existing Project -> https://github.com/npna/KnotClock.git)
 3. Create a [free Apple Developer account](https://developer.apple.com/) and login with it in Xcode
 4. Use [this guide](https://codewithchris.com/deploy-your-app-on-an-iphone/) (not mine, it just came up with a quick search and seems to cover everything since I din't want to create one from scratch) to install it on your device
 
