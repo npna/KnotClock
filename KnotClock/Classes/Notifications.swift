@@ -30,13 +30,26 @@ class Notifications: ObservableObject {
         print("Resetting Notifications")
         #endif
         
-        DispatchQueue.global(qos: .userInitiated).asyncAfter(deadline: .now() + 0.3) {
-            self.addAllWithoutChecks(fullList)
+        DispatchQueue.global(qos: .userInitiated).asyncAfter(deadline: .now() + 0.5) {
+            self.addAll(fullList)
         }
     }
     
-    func addAllWithoutChecks(_ countdowns: [Countdown]) {
+    func addAll(_ countdowns: [Countdown]) {
         for countdown in countdowns {
+            // Skip tomorrow's countdown if the same for today hasn't expired yet
+            if countdown.isForTomorrow == true,
+               let sameButForToday = countdowns.first(where: { $0.isForTomorrow == false && $0.id == countdown.id }),
+               sameButForToday.remainingSeconds > 0
+            {
+                continue
+            }
+            
+            // Skip distant singles
+            if countdown.category == .single && countdown.remainingSeconds >= 86400 {
+                continue
+            }
+            
             if preferences.x.firstCIEnabled && preferences.x.notificationOnFirstIndication {
                 let firstIndicationSeconds = TimeInterval(countdown.remainingSeconds - preferences.x.firstCIRemainingSeconds)
                 add(countdown: countdown, willReach: "First Indication", inSeconds: firstIndicationSeconds)
